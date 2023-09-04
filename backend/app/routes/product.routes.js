@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const productController = require('./controllers/product.controller'); // Import the controller
+const productController = require('../controllers/product.controller'); // Import the controller
 
 const app = express();
 const port = 3000;
