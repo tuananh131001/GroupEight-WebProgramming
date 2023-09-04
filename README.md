@@ -4,8 +4,9 @@
 
 ## Setup
 1. Clone repo
-2. `npm i`
-3. run server `npm run dev`
+2. `cd backend`
+3. `npm i`
+4. run server `npm run dev`
 
 # POSTMAN API
 [Title](<Web Programming.postman_collection.json>)
