@@ -18,7 +18,7 @@ const productSchema = mongoose.model(
   image: {
     data: Buffer, // Store binary data of the image
     contentType: String, // Store the content type (e.g., 'image/jpeg', 'image/png')
-    filename: String,
+    // filename: String,
   },
   description: {
     type: String,
