@@ -8,6 +8,7 @@ const db = require("./app/models/init");
 app.use(express.json());
 
 require("./app/routes/auth.routes")(app);
+require("./app/routes/product.routes")(app);
 
 mongoose
   .connect(db.mongoDBUrl)
