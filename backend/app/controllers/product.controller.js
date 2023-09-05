@@ -1,8 +1,8 @@
 const db = require("../models/init");
 const Product = db.product;
-const fs = require('fs'); // For file handling
-const { v4: uuidv4 } = require('uuid'); // For generating unique filenames
-const path = require('path');
+// const fs = require('fs'); // For file handling
+// const { v4: uuidv4 } = require('uuid'); // For generating unique filenames
+// const path = require('path');
 
 // // Function to handle image uploads
 // const handleImageUpload = (imageData) => {
