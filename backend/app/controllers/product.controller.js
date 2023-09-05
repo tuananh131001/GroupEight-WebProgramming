@@ -4,43 +4,69 @@ const fs = require('fs'); // For file handling
 const { v4: uuidv4 } = require('uuid'); // For generating unique filenames
 const path = require('path');
 
-// Function to handle image uploads
-const handleImageUpload = (imageData) => {
-    const uniqueFilename = `${uuidv4()}.jpg`; // Generate a unique filename
-    const imagePath = path.join(__dirname, '../uploads', uniqueFilename); // Set the path for the uploaded image
+// // Function to handle image uploads
+// const handleImageUpload = (imageData) => {
+//     const uniqueFilename = `${uuidv4()}.jpg`; // Generate a unique filename
+//     const imagePath = path.join(__dirname, '../uploads', uniqueFilename); // Set the path for the uploaded image
   
-    fs.writeFileSync(imagePath, imageData); // Write the image data to the file
-    return uniqueFilename;
-  };
+//     fs.writeFileSync(imagePath, imageData); // Write the image data to the file
+//     return uniqueFilename;
+//   };
 
 // Create a new product
 exports.createProduct = async (req, res) => {
-    try {
-        // Extract product data from the request body
-        const { name, price, description, image } = req.body;
+//     try {
+//         // Extract product data from the request body
+//         const { name, price, description, image } = req.body;
     
-        // Handle image upload
-        const imageData = Buffer.from(image, 'base64');
-        const uniqueFilename = handleImageUpload(imageData);
+//         // Handle image upload
+//         const imageData = Buffer.from(image, 'base64');
+//         const uniqueFilename = handleImageUpload(imageData);
     
-        // Create a new product instance
-        const product = new Product({
-          name,
-          price,
-          description,
-          image: {
-            data: imageData,
-            contentType: 'image/jpg', // Set the appropriate content type here
-            filename: uniqueFilename,
-          },
-        });
+//         // Create a new product instance
+//         const product = new Product({
+//           name,
+//           price,
+//           description,
+//           image: {
+//             data: imageData,
+//             contentType: 'image/jpg', // Set the appropriate content type here
+//             filename: uniqueFilename,
+//           },
+//         });
     
-        // Save the product to the database
-        await product.save();
-        res.status(201).json(product);
-      } catch (error) {
-        res.status(500).json({ error: error.message });
-      }
+//         // Save the product to the database
+//         await product.save();
+//         res.status(201).json(product);
+//       } catch (error) {
+//         res.status(500).json({ error: error.message });
+//       }
+// };
+try {
+  // Extract product data from the request body
+  const { name, price, description } = req.body;
+
+  // Handle image upload using multer
+  const imageData = req.file.buffer; // Binary image data
+  const contentType = req.file.mimetype;
+
+  // Create a new product instance with the image data
+  const newProduct = new Product({
+    name,
+    price,
+    description,
+    image: {
+      data: imageData,
+      contentType: contentType,
+    },
+  });
+
+  // Save the new product to the database
+  await newProduct.save();
+  res.status(201).json(newProduct);
+} catch (error) {
+  res.status(500).json({ error: error.message });
+}
 };
 
 // Get all products
@@ -68,42 +94,72 @@ exports.getProductById = async (req, res) => {
 
 // Update a product by ID
 exports.updateProductById = async (req, res) => {
- try {
-    const product = await Product.findById(req.params.id);
-    if (!product) {
-      return res.status(404).json({ error: 'Product not found' });
-    }
+//  try {
+//     const product = await Product.findById(req.params.id);
+//     if (!product) {
+//       return res.status(404).json({ error: 'Product not found' });
+//     }
 
-    // Update product fields (except for the image)
-    product.name = req.body.name;
-    product.price = req.body.price;
-    product.description = req.body.description;
+//     // Update product fields (except for the image)
+//     product.name = req.body.name;
+//     product.price = req.body.price;
+//     product.description = req.body.description;
 
-    // Handle image upload if provided
-    if (req.body.image) {
-      const imageData = Buffer.from(req.body.image, 'base64');
-      const uniqueFilename = handleImageUpload(imageData);
+//     // Handle image upload if provided
+//     if (req.body.image) {
+//       const imageData = Buffer.from(req.body.image, 'base64');
+//       const uniqueFilename = handleImageUpload(imageData);
 
-      // Update the product's image field
-      product.image.data = imageData;
-      product.image.contentType = 'image/png'; // You can set the appropriate content type here
+//       // Update the product's image field
+//       product.image.data = imageData;
+//       product.image.contentType = 'image/jpg'; // You can set the appropriate content type here
 
-      // Remove the old image file if it exists
-      if (product.image.filename) {
-        const oldImagePath = path.join(__dirname, '../uploads', product.image.filename);
-        fs.unlinkSync(oldImagePath);
-      }
+//       // Remove the old image file if it exists
+//       if (product.image.filename) {
+//         const oldImagePath = path.join(__dirname, '../uploads', product.image.filename);
+//         fs.unlinkSync(oldImagePath);
+//       }
 
-      // Store the new image filename
-      product.image.filename = uniqueFilename;
-    }
+//       // Store the new image filename
+//       product.image.filename = uniqueFilename;
+//     }
 
-    // Save the updated product
-    await product.save();
-    res.json(product);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+//     // Save the updated product
+//     await product.save();
+//     res.json(product);
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// };
+try {
+  // Extract product data from the request body
+  const { name, price, description } = req.body;
+
+  // Handle image upload using multer
+  const imageData = req.file.buffer; // Binary image data
+  const contentType = req.file.mimetype;
+
+  // Find the product by ID
+  const productId = req.params.id;
+  const product = await Product.findById(productId);
+
+  if (!product) {
+    return res.status(404).json({ error: 'Product not found' });
   }
+
+  // Update the product properties
+  product.name = name;
+  product.price = price;
+  product.description = description;
+  product.image.data = imageData;
+  product.image.contentType = contentType;
+
+  // Save the updated product to the database
+  await product.save();
+  res.status(200).json(product);
+} catch (error) {
+  res.status(500).json({ error: error.message });
+}
 };
 
 // Delete a product by ID

@@ -10,4 +10,6 @@ function checkUserRole(role) {
         res.status(403).json({ error: 'Permission denied.' });
       }
     };
-  }
+  };
+  
+  module.exports = checkUserRole;
