@@ -6,7 +6,7 @@ const path = require('path');
 
 // Function to handle image uploads
 const handleImageUpload = (imageData) => {
-    const uniqueFilename = `${uuidv4()}.png`; // Generate a unique filename
+    const uniqueFilename = `${uuidv4()}.jpg`; // Generate a unique filename
     const imagePath = path.join(__dirname, '../uploads', uniqueFilename); // Set the path for the uploaded image
   
     fs.writeFileSync(imagePath, imageData); // Write the image data to the file
@@ -30,7 +30,7 @@ exports.createProduct = async (req, res) => {
           description,
           image: {
             data: imageData,
-            contentType: 'image/png', // Set the appropriate content type here
+            contentType: 'image/jpg', // Set the appropriate content type here
             filename: uniqueFilename,
           },
         });
@@ -114,6 +114,34 @@ exports.deleteProductById = async (req, res) => {
       return res.status(404).json({ error: 'Product not found' });
     }
     res.json({ message: 'Product deleted' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+//filter products by min and max price
+exports.getFilteredProducts = async (req, res) => {
+  try {
+    const { minPrice, maxPrice } = req.query;
+
+    //Build a query object for the MongoDB aggregation pipeline
+    const pipeline = [];
+
+    //Match products within the price range (if both min and max prices are provided)
+    if (minPrice !== undefined && maxPrice !== undefined) {
+      const minPriceFloat = parseFloat(minPrice);
+      const maxPriceFloat = parseFloat(maxPrice);
+      pipeline.push({
+        $match: {
+          price: { $gte: minPriceFloat, $lte: maxPriceFloat },
+        },
+      });
+    }
+
+    // Aggregate the products
+    const products = await Product.aggregate(pipeline);
+
+    res.json(products);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

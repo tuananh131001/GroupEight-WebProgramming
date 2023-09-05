@@ -7,4 +7,5 @@ app.get('/products', productController.getAllProducts);
 app.get('/products/:id', productController.getProductById);
 app.put('/products/:id', productController.updateProductById);
 app.delete('/products/:id', productController.deleteProductById);
+app.get('/products/filter', productController.getFilteredProducts);
 };
