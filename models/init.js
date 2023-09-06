@@ -10,6 +10,6 @@ db.users = require("./user.model.js");
 
 db.ROLES = ["customer", "vendor", "shipper"];
 
-db.product = require("./product.model.js")
+db.product = require("./product.model.js");
 
 module.exports = db;
