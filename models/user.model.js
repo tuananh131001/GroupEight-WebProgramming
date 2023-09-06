@@ -36,7 +36,7 @@ const User = mongoose.model(
       enum: ["customer", "vendor", "shipper"],
       default: "customer",
     },
-  })
+  }),
 );
 
 module.exports = User;

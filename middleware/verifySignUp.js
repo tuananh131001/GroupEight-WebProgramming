@@ -6,9 +6,8 @@ const checkDuplicateUsername = (req, res, next) => {
   User.findOne({ username: req.body.username })
     .then((user) => {
       if (user) {
-        return res
-          .status(400)
-          .json({ message: "Failed! Username is already in use!" });
+        req.flash("error_msg", "Username already exists");
+        return res.redirect("back");
       }
       next();
     })
@@ -25,9 +24,8 @@ const checkDuplicateBusName = (req, res, next) => {
   })
     .then((user) => {
       if (user) {
-        return res
-          .status(400)
-          .json({ message: "Failed! businessName is already in use!" });
+        req.flash("error_msg", "Business name already exists");
+        return res.redirect("back");
       }
       next();
     })
@@ -44,9 +42,8 @@ const checkDuplicateBusAddress = (req, res, next) => {
   })
     .then((user) => {
       if (user) {
-        return res
-          .status(400)
-          .json({ message: "Failed! businessAddress is already in use!" });
+        req.flash("error_msg", "Business address already exists");
+        return res.redirect("back");
       }
       next();
     })
@@ -60,9 +57,8 @@ const checkRolesExisted = (req, res, next) => {
   if (req.body.roles) {
     for (let i = 0; i < req.body.roles.length; i++) {
       if (!ROLES.includes(req.body.roles[i])) {
-        return res.status(400).json({
-          message: "Failed! Role does not exist: " + req.body.roles[i],
-        });
+        req.flash("error_msg", "Role does not exist");
+        return res.redirect("back");
       }
     }
   }
@@ -74,7 +70,7 @@ const verifySignUp = {
   checkDuplicateUsername: checkDuplicateUsername,
   checkRolesExisted: checkRolesExisted,
   checkDuplicateBusName: checkDuplicateBusName,
-  checkDuplicateBusAddress: checkDuplicateBusAddress
+  checkDuplicateBusAddress: checkDuplicateBusAddress,
 };
 
 module.exports = verifySignUp;
