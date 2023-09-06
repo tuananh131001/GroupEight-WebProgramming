@@ -24,9 +24,10 @@ try {
 
   // Save the new product to the database
   await newProduct.save();
-  res.status(201).json(newProduct);
+  // Render the EJS view
+  res.status(201).render('index', { newProduct });
 } catch (error) {
-  res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message });
 }
 };
 
@@ -34,10 +35,12 @@ try {
 exports.getAllProducts = async (req, res) => {
   try {
     const products = await Product.find();
-    res.json(products);
-  } catch (error) {
+
+    // Render the EJS view
+    res.render('product', { products });
+} catch (error) {
     res.status(500).json({ error: error.message });
-  }
+}
 };
 
 // Get a specific product by Name
@@ -54,10 +57,11 @@ exports.getProductByName = async (req, res) => {
       return res.status(404).json({ error: 'No products found with that name.' });
     }
 
-    res.json(products);
-  } catch (error) {
+ // Render the EJS view
+ res.render('product', { products });
+} catch (error) {
     res.status(500).json({ error: error.message });
-  }
+}
 };
 // Update a product by Name
 exports.updateProductByName = async (req, res) => {
@@ -73,11 +77,11 @@ try {
   const productName = req.params.name;
 
     // Use Mongoose to find products by name (case-insensitive)
-    const products = await Product.find({
+    const product = await Product.find({
       name: { $regex: new RegExp(productName, 'i') }, // Case-insensitive search
     });
 
-    if (products.length === 0) {
+    if (product.length === 0) {
       return res.status(404).json({ error: 'No products found with that name.' });
     }
 
@@ -90,9 +94,10 @@ try {
 
   // Save the updated product to the database
   await product.save();
-  res.status(200).json(product);
+  // Render the EJS view
+  res.status(201).render('index', { product });
 } catch (error) {
-  res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message });
 }
 };
 
@@ -100,18 +105,19 @@ try {
 exports.deleteProductByName = async (req, res) => {
   try {
     const productName = req.params.name;
- // Use Mongoose to find and delete a product by name
- const deletedProduct = await Product.findOneAndDelete({
-  name: { $regex: new RegExp(productName, 'i') }, // Case-insensitive search
-});
+    // Use Mongoose to find and delete a product by name
+    const deletedProduct = await Product.findOneAndDelete({
+    name: { $regex: new RegExp(productName, 'i') }, // Case-insensitive search
+    });
 
- if (!deletedProduct) {
-   return res.status(404).json({ error: 'Product not found.' });
- }
+    if (!deletedProduct) {
+      return res.status(404).json({ error: 'Product not found.' });
+    }
 
- res.json({ message: 'Product deleted successfully', deletedProduct });
-} catch (error) {
- res.status(500).json({ error: error.message });
+    // Render a success message using an EJS template
+    res.status(200).render('deleteProduct', { deletedProduct });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
 }
 };
 
@@ -137,7 +143,8 @@ exports.getFilteredProducts = async (req, res) => {
     // Aggregate the products
     const products = await Product.aggregate(pipeline);
 
-    res.json(products);
+    // Render a list of filtered products using an EJS template
+    res.status(200).render('filteredProducts', { products });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
