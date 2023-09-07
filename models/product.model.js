@@ -26,9 +26,8 @@ const productSchema = mongoose.model(
   },
   vendor: {
     type: Schema.Types.ObjectId,
-    ref: 'User', // Reference to the User model (assuming 'User' is your user schema)
+    ref: 'User', // Reference to the User model 
     required: true,
-    select: false,
   },
 })
 );
