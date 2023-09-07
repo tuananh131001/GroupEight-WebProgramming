@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group 8</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    
+</head>
+<body>
+    <div class="container text-center">
+        <h4>Product 1</h4>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+                    <a href="#"><img src="..." class="card-img-top" alt="..."></a>
+                    <div class="card-body">
+                        <a href="#"><h5 class="card-title">Product Name</h5></a>
+                        <a href="#"><p class="card-text">Description or Price</p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+                    <a href="#"><img src="..." class="card-img-top" alt="..."></a>
+                    <div class="card-body">
+                        <a href="#"><h5 class="card-title">Product Name</h5></a>
+                        <a href="#"><p class="card-text">Description or Price</p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+                    <a href="#"><img src="..." class="card-img-top" alt="..."></a>
+                    <div class="card-body">
+                        <a href="#"><h5 class="card-title">Product Name</h5></a>
+                        <a href="#"><p class="card-text">Description or Price</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+                    <a href="#"><img src="..." class="card-img-top" alt="..."></a>
+                    <div class="card-body">
+                        <a href="#"><h5 class="card-title">Product Name</h5></a>
+                        <a href="#"><p class="card-text">Description or Price</p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+                    <a href="#"><img src="..." class="card-img-top" alt="..."></a>
+                    <div class="card-body">
+                        <a href="#"><h5 class="card-title">Product Name</h5></a>
+                        <a href="#"><p class="card-text">Description or Price</p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+                    <a href="#"><img src="..." class="card-img-top" alt="..."></a>
+                    <div class="card-body">
+                        <a href="#"><h5 class="card-title">Product Name</h5></a>
+                        <a href="#"><p class="card-text">Description or Price</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+                    <a href="#"><img src="..." class="card-img-top" alt="..."></a>
+                    <div class="card-body">
+                        <a href="#"><h5 class="card-title">Product Name</h5></a>
+                        <a href="#"><p class="card-text">Description or Price</p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+                    <a href="#"><img src="..." class="card-img-top" alt="..."></a>
+                    <div class="card-body">
+                        <a href="#"><h5 class="card-title">Product Name</h5></a>
+                        <a href="#"><p class="card-text">Description or Price</p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+                    <a href="#"><img src="..." class="card-img-top" alt="..."></a>
+                    <div class="card-body">
+                        <a href="#"><h5 class="card-title">Product Name</h5></a>
+                        <a href="#"><p class="card-text">Description or Price</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4>Product 2</h4>
+        <div class="row">
+            <div class="col-sm-4">
+                <img src="bandmember.jpg" alt="Random Name"> <br>
+                <p><strong>Name</strong></p>
+                <p>Description</p>
+              </div>
+              <div class="col-sm-4">
+                <img src="bandmember.jpg" alt="Random Name"> <br>
+                <p><strong>Name</strong></p>
+                <p>Description</p>
+              </div>
+              <div class="col-sm-4">
+                <img src="bandmember.jpg" alt="Random Name"> <br>
+                <p><strong>Name</strong></p>
+                <p>Description</p>
+            </div>
+            <div class="col-sm-4">
+                <img src="bandmember.jpg" alt="Random Name"> <br>
+                <p><strong>Name</strong></p>
+                <p>Description</p>
+              </div>
+              <div class="col-sm-4">
+                <img src="bandmember.jpg" alt="Random Name"> <br>
+                <p><strong>Name</strong></p>
+                <p>Description</p>
+              </div>
+              <div class="col-sm-4">
+                <img src="bandmember.jpg" alt="Random Name"> <br>
+                <p><strong>Name</strong></p>
+                <p>Description</p>
+            </div>
+        </div>
+    </div>
+    <main>
+        <div class="album py-5 bg-body-tertiary" id="products">
+            <div class="container">
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+
+                <% products.forEach(function(product){ %>
+                <div class="col">
+                    <div class="card shadow-sm">
+                    <img src="/images/<%= product.image %>" alt="<%= product.image %>">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                        <%= product.name %>
+                        </h3>
+                        <h4 class="card-text text-danger">
+                        <%= product.price %> AUD
+                        </h4>
+                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="product/<%= product.id %>" type="button" class="btn btn-primary">View</a>
+                            <a href="product/<%= product.id %>/delete" type="button" class="btn  btn-danger">Delete</a>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+            </div>
+        </div>
+    </main>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
