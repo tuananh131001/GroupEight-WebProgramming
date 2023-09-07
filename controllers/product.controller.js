@@ -35,7 +35,7 @@ try {
 // Get all products
 exports.getAllProducts = async (req, res) => {
   try {
-    const products = await Product.find().select('-vendor');
+    const products = await Product.find({}, { _id: 0, vendor: 0 });
 
 
     // Render the EJS view
@@ -53,7 +53,7 @@ exports.getProductByName = async (req, res) => {
     // Use Mongoose to find products by name (case-insensitive)
     const products = await Product.find({
       name: { $regex: new RegExp(productName, 'i') }, // Case-insensitive search
-    }).select('-vendor');
+    }, { _id: 0, vendor: 0 });
 
 
     if (products.length === 0) {
@@ -146,6 +146,7 @@ exports.getFilteredProducts = async (req, res) => {
     // Project the fields you want to include (excluding 'vendor')
     pipeline.push({
       $project: {
+        _id: 0,
         vendor: 0, // Exclude the 'vendor' field
       },
     });
@@ -165,9 +166,9 @@ exports.getMyProducts = async(req, res) => {
   try {
     const vendorId = req.user._id;
 
-    const products = await Product.find({
-      vendor: vendorId
-    });
+    const products = await Product.find(
+      {vendor: vendorId}, 
+      { _id: 0, vendor: 0 });
 
     res.render('my products', { products });
   } catch (error) {
