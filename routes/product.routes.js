@@ -3,24 +3,31 @@ const productController = require("../controllers/product.controller"); // Impor
 const uploadImage = require("../middleware/uploadImage");
 // Routes
 module.exports = function (app) {
+  // for vendors
+  app.get("products/vendors-only/my-products", 
+  checkUserRole("vendor"),
+  productController.getMyProducts,
+  )
   app.post(
-    "/products/vendors-only/:id",
+    "/products/vendors-only/my-products",
     checkUserRole("vendor"),
     uploadImage.single("image"),
     productController.createProduct,
   );
-  app.get("/products", productController.getAllProducts);
-  app.get("/products/:id", productController.getProductByName);
   app.put(
-    "/products/vendors-only/:id",
+    "/products/vendors-only/my-products",
     checkUserRole("vendor"),
     uploadImage.single("image"),
     productController.updateProductByName,
   );
   app.delete(
-    "/products/vendors-only/:id",
+    "/products/vendors-only/my-products",
     checkUserRole("vendor"),
     productController.deleteProductByName,
   );
+  // for customers
+  app.get("/products", productController.getAllProducts);
+  app.get("/products/:id", productController.getProductByName);
   app.get("/products/filter", productController.getFilteredProducts);
 };
+

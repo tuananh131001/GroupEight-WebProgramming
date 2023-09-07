@@ -20,6 +20,7 @@ try {
       data: imageData,
       contentType: contentType,
     },
+    vendor: req.user._id,
   });
 
   // Save the new product to the database
@@ -34,7 +35,8 @@ try {
 // Get all products
 exports.getAllProducts = async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().select('-vendor');
+
 
     // Render the EJS view
     res.render('product', { products });
@@ -51,7 +53,8 @@ exports.getProductByName = async (req, res) => {
     // Use Mongoose to find products by name (case-insensitive)
     const products = await Product.find({
       name: { $regex: new RegExp(productName, 'i') }, // Case-insensitive search
-    });
+    }).select('-vendor');
+
 
     if (products.length === 0) {
       return res.status(404).json({ error: 'No products found with that name.' });
@@ -140,11 +143,33 @@ exports.getFilteredProducts = async (req, res) => {
       });
     }
 
+    // Project the fields you want to include (excluding 'vendor')
+    pipeline.push({
+      $project: {
+        vendor: 0, // Exclude the 'vendor' field
+      },
+    });
+
     // Aggregate the products
     const products = await Product.aggregate(pipeline);
 
     // Render a list of filtered products using an EJS template
     res.status(200).render('filteredProducts', { products });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Get my products as a vendor
+exports.getMyProducts = async(req, res) => {
+  try {
+    const vendorId = req.user._id;
+
+    const products = await Product.find({
+      vendor: vendorId
+    });
+
+    res.render('my products', { products });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
