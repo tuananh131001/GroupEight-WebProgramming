@@ -15,6 +15,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(expressLayouts);
 app.set("view engine", "ejs");
 
+// TEST
+let products = require('./products');
+console.log(products);
+
+app.get('/products', (req, res) => {
+    res.render('products', {products: products});
+});
+
+
 // Express session
 app.use(
   session({
