@@ -14,13 +14,20 @@ app.use(express.urlencoded({ extended: true }));
 // EJS
 app.use(expressLayouts);
 app.set("view engine", "ejs");
+app.use(express.static('public'));
 
 // TEST
 let products = require('./products');
 console.log(products);
 
-app.get('/products', (req, res) => {
-    res.render('products', {products: products});
+app.get('/product-list', (req, res) => {
+    res.render('product-list', {products: products});
+});
+
+app.get('/product/:id', (req, res) => {
+  const {id} = req.params;
+  const matchedProduct = products.find(product => product.id == id);
+  res.render('product', {product: matchedProduct});
 });
 
 
