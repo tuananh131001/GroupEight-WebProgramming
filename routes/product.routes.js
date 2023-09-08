@@ -5,7 +5,7 @@ const uploadImage = require("../middleware/uploadImage");
 module.exports = function (app) {
   // for vendors
   // Render the product creation form
-  app.get('/products/vendor-only/my-products/create', (req, res) => {
+  app.get('/products/vendor-only/my-products', (req, res) => {
     res.render('createProduct'); // Render the EJS template
   });
   app.post(
@@ -33,5 +33,6 @@ module.exports = function (app) {
   app.get("/products", productController.getAllProducts);
   app.get("/products/:id", productController.getProductById);
   app.get("/products/filter", productController.getFilteredProducts);
+  app.get("/products/:name", productController.getProductByName);
 };
 

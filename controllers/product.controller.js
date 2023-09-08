@@ -26,7 +26,7 @@ try {
   // Save the new product to the database
   await newProduct.save();
   // Render the EJS view
-  res.redirect('/my-products');
+  res.redirect('/products/vendors-only/my-products');
 } catch (error) {
     res.status(500).json({ error: error.message });
 }
