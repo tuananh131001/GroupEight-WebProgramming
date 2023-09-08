@@ -35,11 +35,11 @@ try {
 // Get all products
 exports.getAllProducts = async (req, res) => {
   try {
-    const products = await Product.find({}, { _id: 0, vendor: 0 });
+    const products = await Product.find();
 
 
     // Render the EJS view
-    res.render('product', { products });
+    res.render('products', { products });
 } catch (error) {
     res.status(500).json({ error: error.message });
 }
@@ -168,7 +168,7 @@ exports.getMyProducts = async(req, res) => {
       {vendor: vendorId}, 
       { _id: 0, vendor: 0 });
 
-    res.render('my products', { products });
+    res.render('my-products', { products });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
