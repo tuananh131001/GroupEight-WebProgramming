@@ -43,6 +43,7 @@ app.use(function (req, res, next) {
 require("./routes/auth.routes")(app);
 require("./routes/product.routes")(app);
 require("./routes/index.routes")(app);
+require("./routes/user.routes")(app);
 
 mongoose
   .connect(db.mongoDBUrl)
