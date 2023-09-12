@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>My Account</title>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>My Account</h1>
+        </div>
+        <div class="profile-details">
+            <img src="user-avatar.jpg" alt="User Avatar" id="userAvatar">
+            <h2 id="userName">John Doe</h2>
+            <label for="role">Role:</label>
+            <select id="role" name="role">
+                <option value="Vendor">Vendor</option>
+                <option value="Customer">Customer</option>
+                <option value="Shipper">Shipper</option>
+            </select>
+
+          
+            
+            
+            <p>Phone: <span id="userPhone"></span></p>
+            <p>Location: <span id="userLocation"></span></p>
+            <p>Date of birth: <span id="userDOB"></span></p>
+            <p>Sex: <span id="userSex">Male</span></p>
+            <p for="businessName">Business Name:</p>
+            <span id="businessName"></span>
+
+            <p for="businessAddress">Business Address:</p>
+            <span id="businessAddress"></span>
+
+
+
+            
+            <button id="editProfileBtn" onclick="editProfile()">Edit Profile</button>
+            <button id="saveProfileBtn" onclick="saveProfile()" style="display: none;">Save Changes</button>
+            <button id="cancelProfileBtn" onclick="cancelProfile()" style="display: none;">Cancel Changes</button> <!-- Add this button -->
+            <p id="profileMessage" style="display: none;"></p>
+            
+           
+        </div>
+        <div class="profile-password">
+            <form id="passwordForm" style="display: none;">
+                <label for="currentPassword">Current Password:</label>
+                <input type="password" id="currentPassword"><br>
+                <label for="newPassword">New Password:</label>
+                <input type="password" id="newPassword"><br>
+                <button type="button" onclick="changePassword()">Save Password</button>
+            </form>
+            <button onclick="editPassword()">Change Password</button>
+        </div>
+        <div class="profile-picture">
+            <input type="file" id="newProfilePicture" accept="image/*">
+            <button onclick="changeProfilePicture()">Upload Picture</button>
+        </div>
+      
+
+       
+    </div>
+
+    <script>
+        // Define variables to store original values
+        let originalProfileData = {};
+
+        function editProfile() {
+            const profileElements = document.querySelectorAll('.profile-details span');
+            profileElements.forEach(element => {
+                const input = document.createElement('input');
+                input.value = element.textContent;
+                // Store the original value in the originalProfileData object
+                originalProfileData[element.id] = element.textContent;
+                element.textContent = '';
+                element.appendChild(input);
+            });
+            document.getElementById('editProfileBtn').style.display = 'none';
+            document.getElementById('saveProfileBtn').style.display = 'block';
+            document.getElementById('cancelProfileBtn').style.display = 'block'; // Show the "Cancel Changes" button
+            document.getElementById('profileMessage').style.display = 'none';
+        }
+
+        function cancelProfile() {
+            const profileElements = document.querySelectorAll('.profile-details span');
+            profileElements.forEach(element => {
+                const input = element.querySelector('input');
+                if (input) {
+                    // Restore the original value from the originalProfileData object
+                    element.textContent = originalProfileData[element.id];
+                }
+            });
+            document.getElementById('editProfileBtn').style.display = 'block';
+            document.getElementById('saveProfileBtn').style.display = 'none';
+            document.getElementById('cancelProfileBtn').style.display = 'none'; // Hide the "Cancel Changes" button again
+            document.getElementById('profileMessage').style.display = 'none';
+        }
+
+        function saveProfile() {
+            const profileElements = document.querySelectorAll('.profile-details span');
+            profileElements.forEach(element => {
+                const input = element.querySelector('input');
+                if (input) {
+                    element.textContent = input.value;
+                }
+            });
+            document.getElementById('editProfileBtn').style.display = 'block';
+            document.getElementById('saveProfileBtn').style.display = 'none';
+            document.getElementById('cancelProfileBtn').style.display = 'none'; // Hide the "Cancel Changes" button
+            const profileMessage = document.getElementById('profileMessage');
+            profileMessage.style.display = 'block';
+            alert('Changes saved successfully.');
+        }
+
+
+        function editPassword() {
+            document.getElementById('passwordForm').style.display = 'block';
+            document.querySelector('.profile-password button').style.display = 'none';
+        }
+
+        function changePassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            // Add logic to change the password (e.g., send to the server)
+            // Display a success message or handle errors accordingly
+            console.log('Current Password:', currentPassword);
+            console.log('New Password:', newPassword);
+        }
+
+        function changeProfilePicture() {
+            const newProfilePicture = document.getElementById('newProfilePicture').files[0];
+            // Add logic to upload and update the profile picture
+            // You can use FileReader or make an API call to upload the image
+            // Update the "userAvatar" image with the new picture
+            if (newProfilePicture) {
+                const userAvatar = document.getElementById('userAvatar');
+                userAvatar.src = URL.createObjectURL(newProfilePicture);
+            }
+        }
+        // Function to handle changes in the role dropdown
+        document.addEventListener("DOMContentLoaded", function () {
+    // Function to handle changes in the role dropdown
+        function handleRoleChange() {
+            const selectedRole = document.getElementById('role').value;
+            const businessNameTitle = document.querySelector('p[for="businessName"]');
+            const businessNameField = document.getElementById('businessName');
+            const businessAddressTitle = document.querySelector('p[for="businessAddress"]');
+            const businessAddressField = document.getElementById('businessAddress');
+            
+
+            if (selectedRole === 'Customer') {
+                // If the selected role is "Customer," hide the titles and fields for business name and business address
+                businessNameTitle.style.display = 'none';
+                businessNameField.style.display = 'none';
+                businessAddressTitle.style.display = 'none';
+                businessAddressField.style.display = 'none';
+                
+            } else {
+                // If the selected role is not "Customer," show the titles and fields for business name, business address, and email
+                businessNameTitle.style.display = 'block';
+                businessNameField.style.display = 'block';
+                businessAddressTitle.style.display = 'block';
+                businessAddressField.style.display = 'block';
+              
+            }
+        }
+        
+
+    // Add an event listener to the role dropdown to trigger the function on change
+        document.getElementById('role').addEventListener('change', handleRoleChange);
+
+
+    });
+        
+
+
+
+
+
+       
+    
+    </script>
+        <script src="main.js"></script>
+
+</body>
+</html>
