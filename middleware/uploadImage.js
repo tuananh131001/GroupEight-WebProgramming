@@ -1,7 +1,15 @@
-const multer = require('multer');
+const multer = require("multer");
+const path = require("path");
 
-// Set up multer storage
-const storage = multer.memoryStorage();
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./public/images/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
 const upload = multer({ storage: storage });
 
-module.exports = upload; // Export the upload middleware
+module.exports = upload;

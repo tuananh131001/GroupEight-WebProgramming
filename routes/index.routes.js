@@ -1,9 +1,11 @@
-module.exports = function (app) {
-  app.get("/", (req, res) => res.render("welcome"));
+const { ensureAuthenticated, forwardAuthenticated } = require("../middleware/auth");
 
-  app.get("/dashboard", (req, res) =>
+module.exports = function (app) {
+  app.get("/", forwardAuthenticated, (req, res) => res.render("welcome"));
+
+  app.get("/dashboard", ensureAuthenticated, (req, res) =>
     req.user
       ? res.render("dashboard", { user: req.user })
-      : res.redirect("/login"),
+      : res.redirect("/login")
   );
 };
