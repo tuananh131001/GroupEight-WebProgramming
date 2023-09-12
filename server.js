@@ -5,12 +5,16 @@ const session = require("express-session");
 const passport = require('passport');
 
 require("dotenv").config();
+// Passport Config
+require('./middleware/passport')(passport);
 
 const app = express();
 const mongoose = require("mongoose");
 const db = require("./models/init");
 
 app.use(express.urlencoded({ extended: true }));
+
+app.use('/public/', express.static('./public'));
 
 // EJS
 app.use(expressLayouts);

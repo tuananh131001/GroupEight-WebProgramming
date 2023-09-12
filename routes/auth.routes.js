@@ -1,11 +1,12 @@
 const controller = require("../controllers/auth.controller");
 const verifySignUp = require("../middleware/verifySignUp");
+const passport = require("passport");
 
 module.exports = function (app) {
   app.use(function (req, res, next) {
     res.header(
       "Access-Control-Allow-Headers",
-      "x-access-token, Origin, Content-Type, Accept",
+      "x-access-token, Origin, Content-Type, Accept"
     );
     next();
   });
@@ -18,15 +19,20 @@ module.exports = function (app) {
 
   app.get("/register-shipper", (req, res) => res.render("register-shipper"));
 
-  app.get("/logout", (req, res) => {
-    req.flash("success_msg", "You are logged out");
-    res.redirect("/login");
+  app.get("/logout", function (req, res, next) {
+    req.logout(function (err) {
+      if (err) {
+        return next(err);
+      }
+      req.flash("success_msg", "You are logged out");
+      res.redirect("/login");
+    });
   });
 
   app.post(
     "/register/customer",
     [verifySignUp.checkDuplicateUsername, verifySignUp.checkRolesExisted],
-    controller.signUpCustomer,
+    controller.signUpCustomer
   );
   app.post(
     "/register/vendor",
@@ -36,13 +42,19 @@ module.exports = function (app) {
       verifySignUp.checkDuplicateBusName,
       verifySignUp.checkDuplicateBusAddress,
     ],
-    controller.signUpVendor,
+    controller.signUpVendor
   );
   app.post(
     "/register/shipper",
     [verifySignUp.checkDuplicateUsername, verifySignUp.checkRolesExisted],
-    controller.signUpShipper,
+    controller.signUpShipper
   );
 
-  app.post("/login", controller.signin);
+  app.post("/login", (req, res, next) => {
+    passport.authenticate("local", {
+      successRedirect: "/dashboard",
+      failureRedirect: "/login",
+      failureFlash: true,
+    })(req, res, next);
+  });
 };
