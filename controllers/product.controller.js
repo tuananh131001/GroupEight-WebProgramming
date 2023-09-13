@@ -28,7 +28,7 @@ try {
   // Render the EJS view
   res.redirect('/products/vendors-only/my-products');
 } catch (error) {
-    res.status(500).json({ error: error.message });
+  res.status(500).render('error', { message: 'Internal server error' });
 }
 };
 
@@ -41,7 +41,7 @@ exports.getAllProducts = async (req, res) => {
     // Render the EJS view
     res.render('products', { products });
 } catch (error) {
-    res.status(500).json({ error: error.message });
+  res.status(500).render('error', { message: 'Internal server error' });
 }
 };
 
@@ -61,7 +61,7 @@ exports.getProductByName = async (req, res) => {
     }
     res.render('products', { products, productName });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).render('error', { message: 'Internal server error' });
   }
 };
 // Update a product by Name
@@ -98,7 +98,7 @@ try {
   // Render the EJS view
   res.status(201).render('index', { product });
 } catch (error) {
-    res.status(500).json({ error: error.message });
+  res.status(500).render('error', { message: 'Internal server error' });
 }
 };
 
@@ -118,7 +118,7 @@ exports.deleteProductByName = async (req, res) => {
     // Render a success message using an EJS template
     res.status(200).render('deleteProduct', { deletedProduct });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).render('error', { message: 'Internal server error' });
 }
 };
 
@@ -155,7 +155,7 @@ exports.getFilteredProducts = async (req, res) => {
     // Render a list of filtered products using an EJS template
     res.status(200).render('filteredProducts', { products });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).render('error', { message: 'Internal server error' });
   }
 };
 
@@ -168,7 +168,7 @@ exports.getMyProducts = async(req, res) => {
 
     res.render('my-products', { products });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).render('error', { message: 'Internal server error' });
   }
 };
 
