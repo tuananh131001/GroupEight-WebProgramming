@@ -164,9 +164,7 @@ exports.getMyProducts = async(req, res) => {
   try {
     const vendorId = req.user._id;
 
-    const products = await Product.find(
-      {vendor: vendorId}, 
-      { _id: 0, vendor: 0 });
+    const products = await Product.find({vendor: vendorId});
 
     res.render('my-products', { products });
   } catch (error) {
