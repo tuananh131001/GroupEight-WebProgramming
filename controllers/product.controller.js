@@ -116,7 +116,7 @@ exports.deleteProductByName = async (req, res) => {
     }
 
     // Render a success message using an EJS template
-    res.status(200).render('deleteProduct', { deletedProduct });
+    res.redirect('/products/vendors-only/my-products');
   } catch (error) {
     res.status(500).render('error', { message: 'Internal server error' });
 }
