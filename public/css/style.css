@@ -1,5 +1,7 @@
 .card {
-    margin-left: 90px;
+    margin: 0 auto; /* Added */
+    float: left; /* Added */
+    margin-bottom: 10px; /* Added */
 }
 
 .card-img-top {
