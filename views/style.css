@@ -1,0 +1,165 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+}
+
+.profile-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-header h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    color: #333;
+}
+
+.profile-details {
+    text-align: center;
+}
+
+.profile-details img {
+    max-width: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.profile-details h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.profile-details p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.profile-details span {
+    font-weight: bold;
+}
+
+.profile-details input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.profile-details button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.profile-details button:hover {
+    background-color: #0056b3;
+}
+
+.profile-details select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.profile-password h2 {
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.profile-password label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #555;
+}
+
+.profile-password input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.profile-password button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.profile-password button:hover {
+    background-color: #0056b3;
+}
+
+/* Additional styling for the Role dropdown */
+.profile-details label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Add this CSS for the "Business Address" input */
+#businessAddress {
+    margin-top: 10px; /* Add some space between fields */
+}
+
+/* Add more CSS styles as needed */
+
+/* Colorful Theme */
+.profile-container {
+    background-color: #f7f7f7; /* Light gray background */
+    color: #333; /* Dark text color */
+}
+
+.profile-details input,
+.profile-details select {
+    background-color: #f0f0f0; /* Light gray input background */
+    color: #333; /* Dark text color for inputs */
+    border: 1px solid #ccc; /* Light gray border */
+}
+
+.profile-details button {
+    background-color: #ff6b6b; /* Red button background color */
+    color: #fff; /* White text color for buttons */
+}
+
+.profile-details button:hover {
+    background-color: #ff4040; /* Darker red on hover */
+}
