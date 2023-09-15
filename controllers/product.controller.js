@@ -141,19 +141,11 @@ exports.getFilteredProducts = async (req, res) => {
       });
     }
 
-    // Project the fields you want to include (excluding 'vendor')
-    pipeline.push({
-      $project: {
-        _id: 0,
-        vendor: 0, // Exclude the 'vendor' field
-      },
-    });
-
     // Aggregate the products
     const products = await Product.aggregate(pipeline);
 
     // Render a list of filtered products using an EJS template
-    res.status(200).render('filteredProducts', { products });
+    res.status(200).render('products', { products });
   } catch (error) {
     res.status(500).render('error', { message: 'Internal server error' });
   }
