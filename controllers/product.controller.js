@@ -75,7 +75,7 @@ try {
   const contentType = req.file.mimetype;
 
   // Find the product by Name
-  const productName = req.params.name;
+  const productId = req.params.id;
 
     // Use Mongoose to find products by name (case-insensitive)
     const product = await Product.find({
@@ -103,23 +103,20 @@ try {
 };
 
 // Delete a product by name
-exports.deleteProductByName = async (req, res) => {
+exports.deleteProductById = async (req, res) => {
   try {
-    const productName = req.params.name;
-    // Use Mongoose to find and delete a product by name
-    const deletedProduct = await Product.findOneAndDelete({
-    name: { $regex: new RegExp(productName, 'i') }, // Case-insensitive search
-    });
+    const productId = req.params.id;
+    // Use Mongoose to find and delete by Id
+    const deletedProduct = await Product.deleteOne({ _id: ObjectId(productId) });
 
-    if (!deletedProduct) {
-      return res.status(404).json({ error: 'Product not found.' });
+    if (deletedProduct.deletedCount === 1) {
+      res.redirect("/products/vendors-only/my-products");
+    } else {
+      res.status(404).json({ message: 'Product not found' });
     }
-
-    // Render a success message using an EJS template
-    res.redirect('/products/vendors-only/my-products');
   } catch (error) {
     res.status(500).render('error', { message: 'Internal server error' });
-}
+  }
 };
 
 //filter products by min and max price
