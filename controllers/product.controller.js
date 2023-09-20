@@ -8,18 +8,14 @@ try {
   const { name, price, description } = req.body;
 
   // Handle image upload using multer
-  const imageData = req.file.buffer; // Binary image data
-  const contentType = req.file.mimetype;
+  const imageData = req.file.name; // Binary image data
 
   // Create a new product instance with the image data
   const newProduct = new Product({
     name,
     price,
     description,
-    image: {
-      data: imageData,
-      contentType: contentType,
-    },
+    image: imageData,
     vendor: req.user._id,
   });
 
@@ -64,26 +60,23 @@ exports.getProductByName = async (req, res) => {
     res.status(500).render('error', { message: 'Internal server error' });
   }
 };
-// Update a product by Name
-exports.updateProductByName = async (req, res) => {
+// Update a product by Id
+exports.updateProductById = async (req, res) => {
 try {
   // Extract product data from the request body
   const { name, price, description } = req.body;
 
   // Handle image upload using multer
-  const imageData = req.file.buffer; // Binary image data
-  const contentType = req.file.mimetype;
+  const imageData = req.file.name;
 
-  // Find the product by Name
-  const productName = req.params.name;
+  // Find the product by id
+  const productId = req.params.id;
 
     // Use Mongoose to find products by name (case-insensitive)
-    const product = await Product.find({
-      name: { $regex: new RegExp(productName, 'i') }, // Case-insensitive search
-    });
+    const product = await Product.findById(productId);
 
     if (product.length === 0) {
-      return res.status(404).json({ error: 'No products found with that name.' });
+      return res.status(404).render('error', { message: 'Product not found' });
     }
 
   // Update the product properties
@@ -102,24 +95,21 @@ try {
 }
 };
 
-// Delete a product by name
-exports.deleteProductByName = async (req, res) => {
+// Delete a product by Id
+exports.deleteProductById = async (req, res) => {
   try {
-    const productName = req.params.name;
-    // Use Mongoose to find and delete a product by name
-    const deletedProduct = await Product.findOneAndDelete({
-    name: { $regex: new RegExp(productName, 'i') }, // Case-insensitive search
-    });
+    const productId = req.params.id;
+    // Use Mongoose to find and delete by Id
+    const deletedProduct = await Product.findByIdAndDelete(productId);
 
-    if (!deletedProduct) {
-      return res.status(404).json({ error: 'Product not found.' });
+    if (deletedProduct.deletedCount === 1) {
+      res.redirect("/products/vendors-only/my-products");
+    } else {
+      return res.status(404).render('error', { message: 'Product not found' });
     }
-
-    // Render a success message using an EJS template
-    res.redirect('/products/vendors-only/my-products');
   } catch (error) {
     res.status(500).render('error', { message: 'Internal server error' });
-}
+  }
 };
 
 //filter products by min and max price
@@ -141,19 +131,11 @@ exports.getFilteredProducts = async (req, res) => {
       });
     }
 
-    // Project the fields you want to include (excluding 'vendor')
-    pipeline.push({
-      $project: {
-        _id: 0,
-        vendor: 0, // Exclude the 'vendor' field
-      },
-    });
-
     // Aggregate the products
     const products = await Product.aggregate(pipeline);
 
     // Render a list of filtered products using an EJS template
-    res.status(200).render('filteredProducts', { products });
+    res.status(200).render('products', { products });
   } catch (error) {
     res.status(500).render('error', { message: 'Internal server error' });
   }

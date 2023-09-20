@@ -23,10 +23,10 @@ module.exports = function (app) {
   checkUserRole("vendor"),
   productController.getMyProducts,
   )
-  app.delete(
-    "/products/vendors-only/my-products",
+  app.post(
+    "/products/vendors-only/my-products/:id",
     checkUserRole("vendor"),
-    productController.deleteProductByName,
+    productController.deleteProductById,
   );
   // for customers
   app.get("/products", productController.getAllProducts);
