@@ -8,18 +8,14 @@ try {
   const { name, price, description } = req.body;
 
   // Handle image upload using multer
-  const imageData = req.file.buffer; // Binary image data
-  const contentType = req.file.mimetype;
+  const imageData = req.file.name; // Binary image data
 
   // Create a new product instance with the image data
   const newProduct = new Product({
     name,
     price,
     description,
-    image: {
-      data: imageData,
-      contentType: contentType,
-    },
+    image: imageData,
     vendor: req.user._id,
   });
 
@@ -64,26 +60,23 @@ exports.getProductByName = async (req, res) => {
     res.status(500).render('error', { message: 'Internal server error' });
   }
 };
-// Update a product by Name
-exports.updateProductByName = async (req, res) => {
+// Update a product by Id
+exports.updateProductById = async (req, res) => {
 try {
   // Extract product data from the request body
   const { name, price, description } = req.body;
 
   // Handle image upload using multer
-  const imageData = req.file.buffer; // Binary image data
-  const contentType = req.file.mimetype;
+  const imageData = req.file.name;
 
-  // Find the product by Name
+  // Find the product by id
   const productId = req.params.id;
 
     // Use Mongoose to find products by name (case-insensitive)
-    const product = await Product.find({
-      name: { $regex: new RegExp(productName, 'i') }, // Case-insensitive search
-    });
+    const product = await Product.findById(productId);
 
     if (product.length === 0) {
-      return res.status(404).json({ error: 'No products found with that name.' });
+      return res.status(404).render('error', { message: 'Product not found' });
     }
 
   // Update the product properties
@@ -102,17 +95,17 @@ try {
 }
 };
 
-// Delete a product by name
+// Delete a product by Id
 exports.deleteProductById = async (req, res) => {
   try {
     const productId = req.params.id;
     // Use Mongoose to find and delete by Id
-    const deletedProduct = await Product.deleteOne({ _id: ObjectId(productId) });
+    const deletedProduct = await Product.findByIdAndDelete(productId);
 
     if (deletedProduct.deletedCount === 1) {
       res.redirect("/products/vendors-only/my-products");
     } else {
-      res.status(404).json({ message: 'Product not found' });
+      return res.status(404).render('error', { message: 'Product not found' });
     }
   } catch (error) {
     res.status(500).render('error', { message: 'Internal server error' });
