@@ -1,24 +1,37 @@
-<form action="/login" method="POST">
-  <div class="form-group">
-    <label for="username">Username</label>
-    <input
-      type="username"
-      id="username"
-      name="username"
-      class="form-control"
-      placeholder="Enter Username"
-    />
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input
-      type="password"
-      id="password"
-      name="password"
-      class="form-control"
-      placeholder="Enter Password"
-    />
-  </div>
-  <button type="submit" class="btn btn-primary btn-block">Login</button>
-</form>
-<p class="lead mt-4">No Account? <a href="/register">Register</a></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <title>Homepage</title>
+</head>
+<body>
+  <%- include('./partials/header.ejs') %>
+  <form action="/login" method="POST">
+    <div class="form-group py-1">
+      <label class="pb-1" for="username">Username</label>
+      <input
+        type="username"
+        id="username"
+        name="username"
+        class="form-control"
+        placeholder="Enter Username"
+      />
+    </div>
+    <div class="form-group py-1 pb-2">
+      <label class="pb-1" for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        class="form-control"
+        placeholder="Enter Password"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Login</button>
+  </form>
+  <p class="lead mt-4">No Account? <a href="/register">Register</a></p>
+  <%- include('./partials/footer.ejs') %>
+</body>
