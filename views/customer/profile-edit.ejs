@@ -1,0 +1,132 @@
+<div class="container-xl px-4 mt-4">
+  <hr class="mt-0 mb-4" />
+  <div class="row">
+    <div class="col-xl-4">
+      <div class="card mb-4 mb-xl-0">
+        <div class="card-header">Profile Picture</div>
+        <div class="card-body text-center">
+          <img
+            class="img-account-profile rounded-circle mb-2"
+            src="http://bootdey.com/img/Content/avatar/avatar1.png"
+            alt
+          />
+          <div class="small font-italic text-muted mb-4">
+            JPG or PNG no larger than 5 MB
+          </div>
+          <input
+            type="file"
+            id="avatarInput"
+            accept="image/jpeg, image/png"
+            style="display: none"
+          />
+          <label for="avatarInput" class="btn btn-primary"
+            >Upload new image</label
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-8">
+      <div class="card mb-4">
+        <div class="card-header">Account Details</div>
+        <div class="card-body">
+          <form id="profileForm" action="/profile/edit" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label class="small mb-1" for="inputUsername">Username</label>
+              <input
+                class="form-control"
+                id="inputUsername"
+                type="text"
+                placeholder="Enter your username"
+                readonly
+              />
+              <div id="usernameValidation" class="text-danger"></div>
+            </div>
+            <div class="mb-3">
+              <label class="small mb-1" for="inputRole">Role</label>
+              <select class="form-select" id="inputRole" disabled>
+                <option value="customer">Customer</option>
+                <option value="vendor">Vendor</option>
+                <option value="shipper">Shipper</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="small mb-1" for="inputName">Name</label>
+              <input
+                class="form-control"
+                id="inputName"
+                type="text"
+                placeholder="Enter your Name"
+                readonly
+              />
+              <div id="nameValidation" class="text-danger"></div>
+            </div>
+            <div class="row gx-3 mb-3">
+              <div class="col-md-6" id="businessNameContainer">
+                <label class="small mb-1" for="inputBusinessName"
+                  >Business Name</label
+                >
+                <input
+                  class="form-control"
+                  id="inputBusinessName"
+                  type="text"
+                  placeholder="Enter your Business Name"
+                  readonly
+                />
+              </div>
+              <div class="col-md-6" id="businessAddressContainer">
+                <label class="small mb-1" for="inputBusinessAddress"
+                  >Business Address</label
+                >
+                <input
+                  class="form-control"
+                  id="inputBusinessAddress"
+                  type="text"
+                  placeholder="Enter your Business Address"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="small mb-1" for="inputLocation">Location</label>
+              <input
+                class="form-control"
+                id="inputLocation"
+                type="text"
+                placeholder="Enter your Location"
+                readonly
+              />
+              <div id="locationValidation" class="text-danger"></div>
+            </div>
+            <!-- Distribution Hubs Select for Shipper -->
+            <div
+              class="mb-3"
+              id="distributionHubContainer"
+              style="display: none"
+            >
+              <label class="small mb-1" for="inputDistributionHub"
+                >Distribution Hub</label
+              >
+              <select class="form-select" id="inputDistributionHub">
+                <option value="hub1">Distribution Hub 1</option>
+                <option value="hub2">Distribution Hub 2</option>
+                <option value="hub3">Distribution Hub 3</option>
+              </select>
+            </div>
+            <!-- End of Distribution Hubs Select -->
+            <button class="btn btn-primary" type="button" id="editProfileBtn">
+              Edit Profile
+            </button>
+            <button
+              class="btn btn-success"
+              type="button"
+              id="saveProfileBtn"
+              style="display: none"
+            >
+              Save Profile
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
