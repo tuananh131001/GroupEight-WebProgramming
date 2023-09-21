@@ -1,5 +1,6 @@
 const db = require("../models/init");
 const User = db.users;
+const LocalStrategy = require('passport-local').Strategy;
 
 var bcrypt = require("bcryptjs");
 
@@ -73,30 +74,4 @@ exports.signUpShipper = (req, res) => {
     req.flash("error_msg", "Unexpected error occurred", error.message);
     res.redirect("back");
   }
-};
-
-exports.signin = (req, res) => {
-  User.findOne({ username: req.body.username })
-    .then((user) => {
-      if (!user) {
-        req.flash("error_msg", "User Not found.");
-        return res.redirect("back");
-      }
-
-      var passwordIsValid = bcrypt.compareSync(
-        req.body.password,
-        user.passwordHash,
-      );
-
-      if (!passwordIsValid) {
-        req.flash("error_msg", "Invalid Password!");
-        return res.redirect("back");
-      }
-
-      res.render("dashboard", { title: "Dashboard", user: user });
-    })
-    .catch((err) => {
-      req.flash("error_msg", "Unexpected error occurred", err.message);
-      res.redirect("back");
-    });
 };

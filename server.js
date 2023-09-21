@@ -2,14 +2,19 @@ const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const flash = require("connect-flash");
 const session = require("express-session");
+const passport = require('passport');
 
 require("dotenv").config();
+// Passport Config
+require('./middleware/passport')(passport);
 
 const app = express();
 const mongoose = require("mongoose");
 const db = require("./models/init");
 
 app.use(express.urlencoded({ extended: true }));
+
+app.use('/public/', express.static('./public'));
 
 // EJS
 app.use(expressLayouts);
@@ -42,6 +47,10 @@ app.use(
   }),
 );
 
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Connect flash
 app.use(flash());
 
@@ -56,6 +65,7 @@ app.use(function (req, res, next) {
 require("./routes/auth.routes")(app);
 require("./routes/product.routes")(app);
 require("./routes/index.routes")(app);
+require("./routes/user.routes")(app);
 
 mongoose
   .connect(db.mongoDBUrl)
