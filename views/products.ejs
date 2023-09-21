@@ -17,12 +17,11 @@
             <li>
                 <h2><%= product.name %></h2>
                 <p>Price: $<%= product.price %></p>
-                <p>Description: <%= product.description %></p>
                 <!-- Display the product image -->
                 <img src="/public/images/<%= user.avatar%>" alt="<%= product.name %>">
                 <!-- You can add more product details here -->
+                <a href="products/<%= product.id %>" type="button" class="btn btn-primary">View</a>
                 <a href="/order" type="button" class="btn btn-primary btn-lg px-4 me-md-2">Order!</a>
-                <!-- <a href="/products/vendors-only/my-products/<%= product.id %>/delete" type="button" class="btn btn-danger btn-lg px-4">Delete</a> -->
             </li>
         <% }); %>
     </ul>
