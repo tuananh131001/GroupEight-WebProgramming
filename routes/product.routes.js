@@ -9,18 +9,18 @@ module.exports = function (app) {
   });
   app.post(
     "/products/vendors-only/my-products",
-    checkUserRole("vendor"),
+    // checkUserRole("vendor"),
     uploadImage.single("image"),
     productController.createProduct,
   );
-  app.put(
-    "/products/vendors-only/my-products",
-    checkUserRole("vendor"),
-    uploadImage.single("image"),
-    productController.updateProductById,
-  );
+  // app.put(
+  //   "/products/vendors-only/my-products",
+  //   checkUserRole("vendor"),
+  //   uploadImage.single("image"),
+  //   productController.updateProductById,
+  // );
   app.get("products/vendors-only/my-products", 
-  checkUserRole("vendor"),
+  // checkUserRole("vendor"),
   productController.getMyProducts,
   )
   app.post(
@@ -28,7 +28,9 @@ module.exports = function (app) {
     checkUserRole("vendor"),
     productController.deleteProductById,
   );
-  app.get("/products/vendors-only/my-products/:id",checkUserRole("vendor"), productController.getProductById);
+  app.get("/products/vendors-only/my-products/:id",
+  checkUserRole("vendor"), 
+  productController.getProductById);
   // for customers
   app.get("/products", productController.getAllProducts);
   app.get("/products/:id", productController.getProductById);
