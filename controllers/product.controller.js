@@ -35,7 +35,7 @@ exports.getAllProducts = async (req, res) => {
 
 
     // Render the EJS view
-    res.render("products", { products });
+    res.render("products", { products, user: req.user });
   } catch (error) {
     res.status(500).render("error", { message: "Internal server error" });
   }
@@ -135,7 +135,7 @@ exports.getFilteredProducts = async (req, res) => {
     const products = await Product.aggregate(pipeline);
 
     // Render a list of filtered products using an EJS template
-    res.status(200).render("products", { products });
+    res.status(200).render("products", { products , user: req.user });
   } catch (error) {
     res.status(500).render("error", { message: "Internal server error" });
   }
