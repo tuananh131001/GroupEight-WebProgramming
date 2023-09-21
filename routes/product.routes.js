@@ -17,17 +17,18 @@ module.exports = function (app) {
     "/products/vendors-only/my-products",
     checkUserRole("vendor"),
     uploadImage.single("image"),
-    productController.updateProductByName,
+    productController.updateProductById,
   );
   app.get("products/vendors-only/my-products", 
   checkUserRole("vendor"),
   productController.getMyProducts,
   )
   app.post(
-    "/products/vendors-only/my-products/:id",
+    "/products/vendors-only/my-products/:id/delete",
     checkUserRole("vendor"),
     productController.deleteProductById,
   );
+  app.get("/products/vendors-only/my-products/:id",checkUserRole("vendor"), productController.getProductById);
   // for customers
   app.get("/products", productController.getAllProducts);
   app.get("/products/:id", productController.getProductById);
