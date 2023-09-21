@@ -8,7 +8,7 @@ function checkUserRole(role) {
     } else {
       // User doesn't have the required role, respond with a forbidden error
       req.flash("error_msg", "You are not authorized to view this page");
-      res.redirect("/dashboard");
+      res.redirect("/");
     }
   };
 }

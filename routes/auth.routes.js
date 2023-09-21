@@ -50,11 +50,20 @@ module.exports = function (app) {
     controller.signUpShipper
   );
 
-  app.post("/login", (req, res, next) => {
+
+  app.post(
+    "/login",
     passport.authenticate("local", {
-      successRedirect: "/dashboard",
       failureRedirect: "/login",
       failureFlash: true,
-    })(req, res, next);
-  });
+    }),
+    (req, res) => {
+      if (req.user.role === "customer") {
+        res.redirect("/");
+      }
+      if (req.user.role === "vendor") {
+        res.redirect("/dashboard");
+      }
+    }
+  );
 };
