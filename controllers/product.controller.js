@@ -16,13 +16,13 @@ try {
     price,
     description,
     image: imageData,
-    vendor: req.user._id,
+    // vendor: req.user._id,
   });
 
   // Save the new product to the database
   await newProduct.save();
   // Render the EJS view
-  res.redirect('/products/vendors-only/my-products');
+  res.render('my-products', {product: newProduct});
 } catch (error) {
   res.status(500).render('error', { message: 'Internal server error' });
 }

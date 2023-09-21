@@ -3,15 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product List</title>
+    <title>My Product List</title>
 </head>
 <body>
-    <h1>Product List</h1>
-
-    
-    <!-- Filter Form -->
-    <%- include('filterProducts.ejs') %>
-
+    <h1>My Product List</h1>
     <ul>
         <% products.forEach(product => { %>
             <li>
@@ -19,9 +14,7 @@
                 <p>Price: $<%= product.price %></p>
                 <!-- Display the product image -->
                 <img src="/public/images/<%= user.avatar%>" alt="<%= product.name %>">
-                <!-- You can add more product details here -->
-                <a href="products/<%= product.id %>" type="button" class="btn btn-primary">View</a>
-                <a href="/order" type="button" class="btn btn-primary btn-lg px-4 me-md-2">Order!</a>
+                <a href="/products/vendors-only/my-products/<%= product.id %>/delete" type="button" class="btn btn-danger btn-lg px-4">Delete</a>
             </li>
         <% }); %>
     </ul>
