@@ -4,14 +4,18 @@ const uploadImage = require("../middleware/uploadImage");
 // Routes
 module.exports = function (app) {
   // for vendors
-  app.get('/products/vendor-only/add-my-product', (req, res) => {
-    res.render('createProduct'); 
-  });
+  app.get(
+    "/products/vendor-only/add-my-product",
+    checkUserRole("vendor"),
+    (req, res) => {
+      res.render("createProduct");
+    }
+  );
   app.post(
     "/products/vendors-only/my-products",
-    // checkUserRole("vendor"),
+    checkUserRole("vendor"),
     uploadImage.single("image"),
-    productController.createProduct,
+    productController.createProduct
   );
   // app.put(
   //   "/products/vendors-only/my-products",
@@ -19,22 +23,25 @@ module.exports = function (app) {
   //   uploadImage.single("image"),
   //   productController.updateProductById,
   // );
-  app.get("products/vendors-only/my-products", 
-  // checkUserRole("vendor"),
-  productController.getMyProducts,
-  )
+  app.get(
+    "/products/vendors-only/my-products",
+    checkUserRole("vendor"),
+    productController.getMyProducts
+  );
   app.post(
     "/products/vendors-only/my-products/:id/delete",
     checkUserRole("vendor"),
-    productController.deleteProductById,
+    productController.deleteProductById
   );
-  app.get("/products/vendors-only/my-products/:id",
-  checkUserRole("vendor"), 
-  productController.getProductById);
+  app.get(
+    "/products/vendors-only/my-products/:id",
+    checkUserRole("vendor"),
+    productController.getProductById
+  );
+
   // for customers
   app.get("/products", productController.getAllProducts);
   app.get("/products/:id", productController.getProductById);
   app.get("/products/filter", productController.getFilteredProducts);
   app.get("/products/:name", productController.getProductByName);
 };
-

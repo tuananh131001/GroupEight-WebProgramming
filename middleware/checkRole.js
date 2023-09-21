@@ -1,7 +1,7 @@
 // Middleware to check user roles
 function checkUserRole(role) {
   return (req, res, next) => {
-    const userRole = req.user.role; 
+    const userRole = req.user?.role; 
     if (userRole === role) {
       // User has the required role, proceed to the next middleware/route handler
       next();

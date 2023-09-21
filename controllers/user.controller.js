@@ -1,4 +1,3 @@
-const uploadImage = require("../middleware/uploadImage");
 
 exports.updateProfile = async (req, res, next) => {
   try {
