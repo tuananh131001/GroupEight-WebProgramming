@@ -32,8 +32,6 @@ exports.createProduct = async (req, res, next) => {
 exports.getAllProducts = async (req, res) => {
   try {
     const products = await Product.find({});
-
-
     // Render the EJS view
     res.render("products", { products, user: req.user });
   } catch (error) {
