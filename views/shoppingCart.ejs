@@ -1,0 +1,15 @@
+ 
+ <script src="../js/shoppingCart.js"></script>
+ <!-- Shopping Cart -->
+ <div id="shopping-cart">
+    <h2>Shopping Cart</h2>
+    <ul id="cart-list">
+        <!-- Cart items will be dynamically added here -->
+    </ul>
+    <p id="cart-total">Total: $0</p>
+    <form id="order-form" action="/confirm-order" method="post">
+        <!-- Add any additional input fields for order details here -->
+        <button type="button" class="btn btn-primary" onclick="submitOrder()">Confirm</button>
+    </form>
+</div>
+
