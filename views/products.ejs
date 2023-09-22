@@ -1,3 +1,10 @@
+<!-- RMIT University Vietnam
+  Course: COSC2430 Web Programming
+  Semester: 2023A
+  Assessment: Assignment 2
+  Author: Le Nguyen Minh Quan
+  ID: s3978949
+  Acknowledgement: https://www.youtube.com/watch?v=FShnKqPXknI, https://getbootstrap.com/docs/5.3/getting-started/introduction/, https://startbootstrap.com/previews/shop-homepage, https://startbootstrap.com/previews/shop-item?fbclid=IwAR00Qh8a1tUfjhFB-gdNVG06kfaSJBrgYJ8_gtcGBoZW75K7biUmqi5l-ko -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,24 +13,56 @@
     <title>Product List</title>
 </head>
 <body>
-    <h1>Product List</h1>
+    <%- include('./partials/headerForcustomer.ejs') %>
 
+    <h1>Product List</h1>
     
     <!-- Filter Form -->
     <%- include('filterProducts.ejs') %>
 
-    <ul>
-        <% products.forEach(product => { %>
-            <li>
+   <!--  <ul> -->
+        <!-- <% products.forEach(product => { %> -->
+           <!--  <li>
                 <h2><%= product.name %></h2>
-                <p>Price: $<%= product.price %></p>
+                <p>Price: $<%= product.price %></p> -->
                 <!-- Display the product image -->
-                <img src="/public/images/<%= user.avatar%>" alt="<%= product.name %>">
+                <!-- <img src="/public/images/<%= user.avatar%>" alt="<%= product.name %>"> -->
                 <!-- You can add more product details here -->
-                <a href="products/<%= product.id %>" type="button" class="btn btn-primary">View</a>
+                <!-- <a href="products/<%= product.id %>" type="button" class="btn btn-primary">View</a>
                 <a href="/order" type="button" class="btn btn-primary btn-lg px-4 me-md-2">Order!</a>
-            </li>
-        <% }); %>
-    </ul>
+            </li> -->
+       <!--  <% }); %> -->
+   <!--  </ul> -->
+   <div class="container text-center">
+        <div class="row"> 
+            <% products.forEach(function(product){ %>
+            <div class="col-lg-4 col-md-6 col-sm-12 p-2">
+                <div class="card w-auto">
+                <a href="#"><img src="/images/<%= product.image %>" class="card-img-top" alt="<%= product.image %>"></a>
+                <div class="card-body text-center">
+                    <h3 class="card-title fs-auto fw-bold">
+                    <%= product.name %>
+                    </h3>
+                    <p class="card-text fs-auto">
+                    <strong>$<%= product.price %></strong>
+                    </p>
+                    <p>Description</p>
+                </div>
+                <div class="card-footer text-center">
+                    <div class="animation-btn">
+                        <a href="products/<%= product.id %>">
+                            <button class="btn btn-outline-dark me-auto">View</button>
+                        </a>
+                        <a href="/order">
+                            <button class="btn btn-outline-dark me-auto">Order!</button>
+                        </a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+        </div>
+   </div>
 </body>
 </html>
