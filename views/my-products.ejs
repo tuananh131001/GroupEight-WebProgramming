@@ -13,7 +13,7 @@
                 <h2><%= product.name %></h2>
                 <p>Price: $<%= product.price %></p>
                 <!-- Display the product image -->
-                <img src="/public/images/<%= user.avatar%>" alt="<%= product.name %>">
+                <img src="/public/images/<%= product.image%>" alt="<%= product.name %>">
                 <a href="/products/vendors-only/my-products/<%= product.id %>/delete" type="button" class="btn btn-danger btn-lg px-4">Delete</a>
             </li>
         <% }); %>
