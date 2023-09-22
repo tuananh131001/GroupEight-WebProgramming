@@ -140,13 +140,13 @@ exports.getFilteredProducts = async (req, res) => {
 };
 
 // Get my products as a vendor
-exports.getMyProducts = async (req, res) => {
+exports.getVendorMyProducts = async (req, res) => {
   try {
     const vendorId = req.user._id;
 
     const products = await Product.find({ vendor: vendorId });
 
-    res.render("my-products", { products, user: req.user });
+    res.render("vendor/my-products", { products, user: req.user });
   } catch (error) {
     req.flash("error_msg", "Unexpected error occurred", error.message);
     res.redirect("back");
