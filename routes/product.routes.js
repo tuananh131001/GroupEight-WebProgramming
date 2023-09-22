@@ -43,5 +43,5 @@ module.exports = function (app) {
   app.get("/products", productController.getAllProducts);
   app.get("/products/:id", productController.getProductById);
   app.get("/products/filter", productController.getFilteredProducts);
-  app.get("/products/:name", productController.getProductByName);
+  app.get("/products/search", productController.getProductByName);
 };
