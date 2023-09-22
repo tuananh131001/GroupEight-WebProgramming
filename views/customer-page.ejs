@@ -9,46 +9,47 @@
     <title>Customer page</title>
 </head>
 <body>
-    <%- include('./partials/headerForcustomer.ejs') %>
-    <h1>Product List</h1>
-    
-    <!-- Search Form -->
-    <%- include('search.ejs') %>
-    <!-- Filter Form -->
-    <%- include('filterProducts.ejs') %>
+    <form action="/customer-page" method="POST">
+        <%- include('./partials/headerForcustomer.ejs') %>
+        <h1>Product List</h1>
+        
+        <!-- Search Form -->
+        <%- include('search.ejs') %>
+        <!-- Filter Form -->
+        <%- include('filterProducts.ejs') %>
 
-   <div class="container text-center">
-        <div class="row"> 
-            <% products.forEach(function(product){ %>
-            <div class="col-lg-4 col-md-6 col-sm-12 p-2">
-                <div class="card w-auto">
-                <a href="#"><img src="/images/<%= product.image %>" class="card-img-top" alt="<%= product.image %>"></a>
-                <div class="card-body text-center">
-                    <h3 class="card-title fs-auto fw-bold">
-                    <%= product.name %>
-                    </h3>
-                    <p class="card-text fs-auto">
-                    <strong>$<%= product.price %></strong>
-                    </p>
-                    <p>Description</p>
-                </div>
-                <div class="card-footer text-center">
-                    <div class="animation-btn">
-                        <a href="products/<%= product.id %>">
-                            <button class="btn btn-outline-dark me-auto">View</button>
-                        </a>
-                        <a href="/order">
-                            <button class="btn btn-outline-dark me-auto">Order!</button>
-                        </a>
+        <div class="container text-center">
+                <div class="row"> 
+                    <% products.forEach(function(product){ %>
+                    <div class="col-lg-4 col-md-6 col-sm-12 p-2">
+                        <div class="card w-auto">
+                        <a href="#"><img src="/images/<%= product.image %>" class="card-img-top" alt="<%= product.image %>"></a>
+                        <div class="card-body text-center">
+                            <h3 class="card-title fs-auto fw-bold">
+                            <%= product.name %>
+                            </h3>
+                            <p class="card-text fs-auto">
+                            <strong>$<%= product.price %></strong>
+                            </p>
+                            <p>Description</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <div class="animation-btn">
+                                <a href="products/<%= product.id %>">
+                                    <button class="btn btn-outline-dark me-auto">View</button>
+                                </a>
+                                <a href="/order">
+                                    <button class="btn btn-outline-dark me-auto">Order!</button>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
                     </div>
+                    <% }); %>
                 </div>
                 </div>
-            </div>
-            <% }); %>
         </div>
-        </div>
-   </div>
-    <%- include('./partials/footer.ejs')  %>
-
+        <%- include('./partials/footer.ejs')  %>
+    </form>
 </body>
 </html>
