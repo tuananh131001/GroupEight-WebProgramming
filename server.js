@@ -48,9 +48,10 @@ require("./routes/auth.routes")(app);
 require("./routes/product.routes")(app);
 require("./routes/index.routes")(app);
 require("./routes/user.routes")(app);
+require("./routes/image.routes")(app);
 
 mongoose
-  .connect(db.mongoDBUrl)
+  .connect(db.mongoDBUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 

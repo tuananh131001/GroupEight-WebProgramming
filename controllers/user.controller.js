@@ -4,7 +4,11 @@ exports.updateProfile = async (req, res, next) => {
     const user = req.user;
     console.log(user)
     const { name, address, businessName, businessAddress } = req.body;
-    const avatar = req.file.filename;
+    const avatarData = req.file.buffer;
+
+    const avatar = await Image.create({
+      file: avatarData,
+    })._id;
 
     if (user.role === "customer") {
       user.name = name;
