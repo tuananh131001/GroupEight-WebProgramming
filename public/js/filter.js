@@ -1,3 +1,10 @@
+/* RMIT University Vietnam
+  Course: COSC2430 Web Programming
+  Semester: 2023A
+  Assessment: Assignment 2
+  Author: Le Nguyen Minh Quan
+  ID: s3978949
+  Acknowledgement: https://www.youtube.com/watch?v=FShnKqPXknI, https://getbootstrap.com/docs/5.3/getting-started/introduction/, https://startbootstrap.com/previews/shop-homepage, https://startbootstrap.com/previews/shop-item?fbclid=IwAR00Qh8a1tUfjhFB-gdNVG06kfaSJBrgYJ8_gtcGBoZW75K7biUmqi5l-ko */
 const rangeInput = document.querySelectorAll(".range-input input"),
 priceInput = document.querySelectorAll(".price-input input"),
 range = document.querySelector(".slider .progress");
