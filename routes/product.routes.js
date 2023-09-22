@@ -5,7 +5,7 @@ const uploadImage = require("../middleware/uploadImage");
 module.exports = function (app) {
   // for vendors
   app.get(
-    "/products/vendor-only/add-my-product",
+    "/products/vendors-only/add-my-product",
     checkUserRole("vendor"),
     (req, res) => {
       res.render("createProduct");
