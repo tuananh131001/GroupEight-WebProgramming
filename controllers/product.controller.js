@@ -37,7 +37,8 @@ exports.getAllProducts = async (req, res) => {
     // Render the EJS view
     res.render("products", { products, user: req.user });
   } catch (error) {
-    res.status(500).render("error", { message: "Internal server error" });
+    req.flash("error_msg", "Unexpected error occurred", error.message);
+    res.redirect("back");
   }
 };
 
@@ -57,7 +58,8 @@ exports.getProductByName = async (req, res) => {
     }
     res.render("products", { products, productName });
   } catch (error) {
-    res.status(500).render("error", { message: "Internal server error" });
+    req.flash("error_msg", "Unexpected error occurred", error.message);
+    res.redirect("back");
   }
 };
 // Update a product by Id
@@ -91,7 +93,8 @@ exports.updateProductById = async (req, res) => {
     // Render the EJS view
     res.status(201).render("index", { product });
   } catch (error) {
-    res.status(500).render("error", { message: "Internal server error" });
+    req.flash("error_msg", "Unexpected error occurred", error.message);
+    res.redirect("back");
   }
 };
 
@@ -108,7 +111,8 @@ exports.deleteProductById = async (req, res) => {
       return res.status(404).render("error", { message: "Product not found" });
     }
   } catch (error) {
-    res.status(500).render("error", { message: "Internal server error" });
+    req.flash("error_msg", "Unexpected error occurred", error.message);
+    res.redirect("back");
   }
 };
 
@@ -137,7 +141,8 @@ exports.getFilteredProducts = async (req, res) => {
     // Render a list of filtered products using an EJS template
     res.status(200).render("products", { products , user: req.user });
   } catch (error) {
-    res.status(500).render("error", { message: "Internal server error" });
+    req.flash("error_msg", "Unexpected error occurred", error.message);
+    res.redirect("back");
   }
 };
 
@@ -150,7 +155,8 @@ exports.getMyProducts = async (req, res) => {
 
     res.render("my-products", { products, user: req.user });
   } catch (error) {
-    res.status(500).render("error", { message: "Internal server error" });
+    req.flash("error_msg", "Unexpected error occurred", error.message);
+    res.redirect("back");
   }
 };
 
@@ -170,6 +176,7 @@ exports.getProductById = async (req, res) => {
     // Render the product details using the EJS template
     res.render("productDetails", { product });
   } catch (error) {
-    res.status(500).render("error", { message: "Internal server error" });
+    req.flash("error_msg", "Unexpected error occurred", error.message);
+    res.redirect("back");
   }
 };
