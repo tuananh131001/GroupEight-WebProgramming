@@ -12,9 +12,11 @@
             <li>
                 <h2><%= product.name %></h2>
                 <p>Price: $<%= product.price %></p>
-                <!-- Display the product image -->
                 <img src="/public/images/<%= product.image%>" alt="<%= product.name %>">
-                <a href="/products/vendors-only/my-products/<%= product.id %>/delete" type="button" class="btn btn-danger btn-lg px-4">Delete</a>
+                <form action="/products/vendors-only/my-products/<%= product.id %>/delete" method="POST" >
+                <input  type="submit" class="btn btn-danger btn-lg px-4"></input>
+
+                </form>
             </li>
         <% }); %>
     </ul>

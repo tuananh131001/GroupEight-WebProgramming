@@ -42,19 +42,15 @@ exports.getAllProducts = async (req, res) => {
 
 // Get a specific product by Name
 exports.getProductByName = async (req, res) => {
-  try {
-    const productName = req.params.name;
+    try {
+    const query = req.query.query;
 
-    // Use Mongoose to find products by name (case-insensitive)
-    const products = await Product.find({
-      name: { $regex: new RegExp(productName, "i") }, // Case-insensitive search
-    });
+    const products = await Product.find({ name: { $regex: query, $options: 'i' } });
 
     if (!products) {
-      // If the product is not found, render an error page or handle it accordingly
-      return res.status(404).render("error", { message: "Product not found" });
+      req.flash("error_msg", "Product not found");
     }
-    res.render("products", { products, productName });
+    res.render("welcome", { products });
   } catch (error) {
     req.flash("error_msg", "Unexpected error occurred", error.message);
     res.redirect("back");
@@ -100,14 +96,13 @@ exports.updateProductById = async (req, res) => {
 exports.deleteProductById = async (req, res) => {
   try {
     const productId = req.params.id;
-    // Use Mongoose to find and delete by Id
     const deletedProduct = await Product.findByIdAndDelete(productId);
 
-    if (deletedProduct.deletedCount === 1) {
-      res.redirect("/products/vendors-only/my-products");
-    } else {
-      return res.status(404).render("error", { message: "Product not found" });
+    if (!deletedProduct) {
+      return req.flash("error_msg", "Product not found");
     }
+
+    res.redirect("/products/vendors-only/my-products");
   } catch (error) {
     req.flash("error_msg", "Unexpected error occurred", error.message);
     res.redirect("back");
@@ -137,7 +132,7 @@ exports.getFilteredProducts = async (req, res) => {
     const products = await Product.aggregate(pipeline);
 
     // Render a list of filtered products using an EJS template
-    res.status(200).render("products", { products , user: req.user });
+    res.render("welcome", { products , user: req.user });
   } catch (error) {
     req.flash("error_msg", "Unexpected error occurred", error.message);
     res.redirect("back");

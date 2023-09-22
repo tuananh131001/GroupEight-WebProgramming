@@ -9,7 +9,10 @@
 </head>
 <body>
     <%- include('./partials/header.ejs') %>
-
+    <!-- Search Form -->
+    <%- include('search.ejs') %>
+    <!-- Filter Form -->
+    <%- include('filterProducts.ejs') %>
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -24,7 +27,7 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder"><%= product.name %></h5>
                                     <!-- Product price-->
-                                    <%= product.price %>
+                                    Price: $<%= product.price %>
                                 </div>
                             </div>
                             <!-- Product actions-->

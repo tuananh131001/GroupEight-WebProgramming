@@ -7,8 +7,8 @@ const db = require("../models/init");
 const Product = db.product;
 
 module.exports = function (app) {
-  app.get("/", ensureAuthenticated, async (req, res) => {
-    
+  app.get("/", async (req, res) => {
+
     const products = await Product.find({});
     res.render("welcome", { products });
   });
