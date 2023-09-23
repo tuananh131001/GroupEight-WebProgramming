@@ -1,4 +1,9 @@
-
+<!-- // RMIT University Vietnam
+// Course: COSC2430 Web Programming
+// Semester: 2023B
+// Assessment: Full-stack Web Application
+// Author: Team Eight
+// Acknowledgement: Google , Stackoverflow, w3schools -->
 <body class="bg-light">
   <%- include('./partials/header.ejs') %>
 
@@ -9,14 +14,14 @@
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <img class="card-img-top" src="/image/<%= product.image %>" alt="<%= product.image %>" />
+                        <img class="card-img-top" src="/image/<%= product?.image %>" alt="<%= product?.image %>" />
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder"><%= product.name %></h5>
+                                <h5 class="fw-bolder"><%= product?.name %></h5>
                                 <!-- Product price-->
-                                Price: $<%= product.price.toFixed(2) %>
+                                Price: $<%= product?.price?.toFixed(2) %>
                             </div>
                         </div>
                     </div>
@@ -95,5 +100,4 @@
     </div>
   </section>
   <%- include('./partials/footer.ejs') %>
-
 </body>

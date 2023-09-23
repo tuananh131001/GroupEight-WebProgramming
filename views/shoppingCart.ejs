@@ -1,3 +1,9 @@
+<!-- // RMIT University Vietnam
+// Course: COSC2430 Web Programming
+// Semester: 2023B
+// Assessment: Full-stack Web Application
+// Author: Team Eight
+// Acknowledgement: Google , Stackoverflow, w3schools -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,8 +13,35 @@
 
   <body>
     <%- include('./partials/header.ejs') %>
+    <div class="container mt-5 d-flex flex-column">
     <div class="container mt-5">
       <h2 class="mb-4">Shopping Cart</h2>
+
+      <ul class="d-flex flex-row flex-wrap">
+        <% carts.forEach((item) => { %>
+        <li class="d-flex flex-row mb-3 gap-5">
+          <img
+            height="200px"
+            src="/image/<%= item.image %>"
+            alt="<%= item.name %>"
+            class="mr-3"
+          />
+          <div class="">
+            <h5 class="mt-0 mb-1"><%= item.name %></h5>
+            $<%= item.price %>
+            <form
+              action="/cart/delete/<%= item._id %>"
+              method="POST"
+              class="mt-2"
+            >
+              <button type="submit" class="btn btn-danger btn-sm">
+                Remove
+              </button>
+            </form>
+          </div>
+        </li>
+        <% }); %>
+      </ul>
       <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -44,24 +77,35 @@
       <h3 class="my-4">Total Price: $<%= totalPrice %></h3>
 
       <form action="/order" method="POST" class="mb-3">
-        <% carts.forEach((item) => { %>
-          <input type="hidden" name="products[productId][]" value="<%= item.productId %>">
-        <% }); %>
-    
-        <input type="hidden" name="total" value="<%= totalPrice %>">
-    
+        <% var products = carts.map(item => ({ name: item.name, price:
+        item.price, image: item.image })); %>
+        <input
+          type="hidden"
+          name="products"
+          value="<%= JSON.stringify(products) %>"
+        />
+
+        <input type="hidden" name="total" value="<%= totalPrice %>" />
+
         <!-- Add an input field for address -->
         <div class="mb-3">
-            <label for="address" class="form-label">Delivery Address</label>
-            <input type="text" class="form-control" id="address" name="address" required>
+          <label for="address" class="form-label">Delivery Address</label>
+          <input
+            type="text"
+            class="form-control"
+            id="address"
+            name="address"
+            required
+          />
         </div>
-        <input type="hidden" name="cartId" value="<%= carts.id %>">
-    
+        <input type="hidden" name="cartId" value="<%= carts.id %>" />
+
         <button type="submit" class="btn btn-primary">Order</button>
+        <a href="/" class="btn btn-light">Continue Shopping</a>
       </form>
     
     
-      <a href="/" class="btn btn-light mb-3">Continue Shopping</a>
+      <a href="/" class="btn btn-light">Continue Shopping</a>
     </div>
     <%- include('./partials/footer.ejs') %>
   </body>

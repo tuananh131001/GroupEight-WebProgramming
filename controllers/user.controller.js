@@ -1,3 +1,10 @@
+/* <!-- // RMIT University Vietnam
+// Course: COSC2430 Web Programming
+// Semester: 2023B
+// Assessment: Full-stack Web Application
+// Author: Team Eight
+// Acknowledgement: Google , Stackoverflow, w3schools --> */
+
 const db = require("../models/init.js");
 const Image = db.image;
 const User = db.users;

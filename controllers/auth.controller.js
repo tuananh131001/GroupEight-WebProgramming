@@ -1,3 +1,10 @@
+/* <!-- // RMIT University Vietnam
+// Course: COSC2430 Web Programming
+// Semester: 2023B
+// Assessment: Full-stack Web Application
+// Author: Team Eight
+// Acknowledgement: Google , Stackoverflow, w3schools --> */
+
 const db = require("../models/init");
 const User = db.users;
 const LocalStrategy = require("passport-local").Strategy;
@@ -71,12 +78,14 @@ const signUpGeneric = async (user_type, request_body) => {
 
 exports.signUpCustomer = async (req, res) => {
   try {
+    if (!req.file) {
+      throw new Error("Missing avatar");
+    }
     const file = req.file.buffer;
     const image = await Image.create({
       file: file,
     });
 
-    // add image id to user
     req.body.avatar = image._id;
     await signUpGeneric("customer", req.body);
     req.flash("success_msg", "Customer created successfully");
@@ -90,6 +99,15 @@ exports.signUpCustomer = async (req, res) => {
 
 exports.signUpVendor = async (req, res) => {
   try {
+    if (!req.file) {
+      throw new Error("Missing avatar");
+    }
+    const file = req.file.buffer;
+    const image = await Image.create({
+      file: file,
+    });
+
+    req.body.avatar = image._id;
     await signUpGeneric("vendor", req.body);
     req.flash("success_msg", "Vendor created successfully");
     res.redirect("/login");
@@ -101,6 +119,15 @@ exports.signUpVendor = async (req, res) => {
 
 exports.signUpShipper = async (req, res) => {
   try {
+    if (!req.file) {
+      throw new Error("Missing avatar");
+    }
+    const file = req.file.buffer;
+    const image = await Image.create({
+      file: file,
+    });
+
+    req.body.avatar = image._id;
     await signUpGeneric("shipper", req.body);
     req.flash("success_msg", "Shipper created successfully");
     res.redirect("/login");
