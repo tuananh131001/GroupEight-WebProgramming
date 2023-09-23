@@ -1,0 +1,45 @@
+
+<body class="bg-light">
+  <%- include('./partials/header.ejs') %>
+
+  <% order.product_detail.forEach(product => { %>
+  <div class="row mb-4 align-items-center">
+    <div class="col-2">
+      <img src="/image/<%= product.image %>" alt="<%= product.name %>" class="img-fluid rounded">
+    </div>
+    <div class="col-10">
+      <h5><%= product.name %></h5>
+      <p class="mb-1">Quantity: <%= product.quantity %></p>
+      <p>Price: $<%= product.price.toFixed(2) %></p>
+    </div>
+  </div>
+  <% }); %>
+
+  <div class="row mb-4">
+    <div class="col-12">
+      <h5>Shipping Address</h5>
+      <p><%= order.address %></p>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-12">
+      <h5>Order Status</h5>
+      <p><%= order.status.charAt(0).toUpperCase() + order.status.slice(1) %></p>
+    </div>
+
+    <div class="col-12">
+      <h5>Order Total</h5>
+      <p>$<%= order.total.toFixed(2) %></p>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-12">
+      <h5>Distribution Hub</h5>
+      <p><%= order.distributionHub %></p>
+    </div>
+  </div>
+  <%- include('./partials/footer.ejs') %>
+
+</body>

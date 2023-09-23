@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shipper Orders</title>
+</head>
+<body class="bg-light">
+  <%- include('./partials/header.ejs') %>
+
+  <div class="container py-5">
+    <h2 class="mb-4">Active Orders</h2>
+
+    <ul class="list-group">
+      <% orders.forEach(order => { %>
+      <li class="list-group-item">
+        <a href="/order/<%= order._id %>" class="text-primary">Order ID: <%= order._id %></a>
+
+
+        <form action="/order/update/<%= order._id %>" method="post" class="mt-2">
+          <div class="row g-3 align-items-center">
+            <div class="col-auto">
+              <select name="status" class="form-select">
+                <option value="delivered">Delivered</option>
+                <option value="canceled">Canceled</option>
+              </select>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary">Update Status</button>
+            </div>
+          </div>
+        </form>
+      </li>
+      <% }); %>
+    </ul>
+  </div>
+  <%- include('./partials/footer.ejs') %>
+
+</body>
+</html>

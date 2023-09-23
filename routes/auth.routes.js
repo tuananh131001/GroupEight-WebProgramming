@@ -79,6 +79,9 @@ module.exports = function (app) {
       if (req.user.role === "vendor") {
         res.redirect("/dashboard");
       }
+      if (req.user.role === "shipper") {
+        res.redirect("/shipper-orders");
+      }
     }
   );
 };

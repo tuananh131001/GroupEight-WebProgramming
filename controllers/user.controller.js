@@ -6,7 +6,7 @@ exports.updateProfile = async (req, res, next) => {
   try {
     const user = req.user;
     console.log("body", req.body);
-    const { name, address, businessName, businessAddress } = req.body;
+    const { name, address, businessName, businessAddress, distributionHub } = req.body;
     const tempUser = user;
 
     if (req.file?.buffer) {

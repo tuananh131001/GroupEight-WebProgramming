@@ -82,6 +82,20 @@
               </div>
             </div>
             <!-- End of Distribution Hubs Select -->
+            <div class="py-2">
+              <label for="distributionHub">Select Distribution Hub:</label>
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                id="distributionHub"
+                name="distributionHub"
+              >
+                <% hubs.forEach(hub => { %>
+                <option value=<%= hub._id %>><%= hub.name %></option>
+                <% }); %>
+              </select>
+            </div>
+            
             <input type="submit" value="Submit"  class="btn btn-primary">
             </input>
           </form>

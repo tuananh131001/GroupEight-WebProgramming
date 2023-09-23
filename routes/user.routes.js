@@ -1,7 +1,8 @@
 const uploadImage = require("../middleware/uploadImage");
 const userController = require("../controllers/user.controller");
 const { ensureAuthenticated } = require("../middleware/auth");
-
+const db = require("../models/init");
+const Hub = db.hub;
 module.exports = function (app) {
   app.use(function (req, res, next) {
     res.header(
@@ -11,17 +12,23 @@ module.exports = function (app) {
     next();
   });
 
-  app.get("/profile", ensureAuthenticated, (req, res) =>
-    res.render("profile", { user: req.user })
-  );
+  app.get("/profile", ensureAuthenticated, async (req, res) => {
+    if (req.user.role === "shipper") {
+      const hub = await Hub.findById(req.user.distributionHub);
+      res.render("profile", { user: req.user, hub });
+    } else {
+      res.render("profile", { user: req.user });
+    }
+  });
 
-  app.get("/profile/edit", ensureAuthenticated, (req, res) => {
+  app.get("/profile/edit", ensureAuthenticated, async (req, res) => {
     if (req.user.role === "customer") {
       res.render("profile-edit", { user: req.user });
     } else if (req.user.role === "vendor") {
       res.render("profile-edit", { user: req.user });
     } else if (req.user.role === "shipper") {
-      res.render("profile-edit", { user: req.user });
+      const hubs = await Hub.find({});
+      res.render("profile-edit", { user: req.user, hubs });
     } else {
       req.flash("error_msg", "Unexpected error occurred", error.message);
       res.redirect("back");
