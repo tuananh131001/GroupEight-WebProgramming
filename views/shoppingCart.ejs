@@ -37,7 +37,7 @@
       <form action="/order" method="POST" class="mb-3">
         <% carts.forEach((item) => { %>
           <input type="hidden" name="products[productId][]" value="<%= item.productId %>">
-      <% }); %>
+        <% }); %>
     
         <input type="hidden" name="total" value="<%= totalPrice %>">
     
@@ -49,7 +49,7 @@
         <input type="hidden" name="cartId" value="<%= carts.id %>">
     
         <button type="submit" class="btn btn-primary">Order</button>
-    </form>
+      </form>
     
     
       <a href="/" class="btn btn-light">Continue Shopping</a>
