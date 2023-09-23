@@ -7,7 +7,7 @@
 
   <body>
     <%- include('./partials/header.ejs') %>
-    <div class="container mt-5">
+    <div class="container mt-5 vh-100">
       <h2 class="mb-4">Shopping Cart</h2>
 
       <ul class="list-unstyled">
@@ -21,7 +21,7 @@
           />
           <div class="media-body">
             <h5 class="mt-0 mb-1"><%= item.name %></h5>
-            $<%= item.price %> x <%= item.quantity %>
+            $<%= item.price %> 
             <form action="/cart/delete/<%= item._id %>" method="POST" class="mt-2">
               <button type="submit" class="btn btn-danger btn-sm">
                 Remove
@@ -37,7 +37,7 @@
       <form action="/order" method="POST" class="mb-3">
         <% carts.forEach((item) => { %>
           <input type="hidden" name="products[productId][]" value="<%= item.productId %>">
-      <% }); %>
+        <% }); %>
     
         <input type="hidden" name="total" value="<%= totalPrice %>">
     
@@ -49,7 +49,7 @@
         <input type="hidden" name="cartId" value="<%= carts.id %>">
     
         <button type="submit" class="btn btn-primary">Order</button>
-    </form>
+      </form>
     
     
       <a href="/" class="btn btn-light">Continue Shopping</a>

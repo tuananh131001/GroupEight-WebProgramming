@@ -1,217 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Homepage</title>
-</head>
-<body>
-  <%- include('./partials/header.ejs') %>
+  </head>
+  <body>
+    <%- include('./partials/header.ejs') %>
 
-  <div class="container-xl px-4 mt-4">
-    <hr class="mt-0 mb-4" />
-    <div class="row">
-      <div class="col-xl-4">
-        <div class="card mb-4 mb-xl-0">
-          <div class="card-header">Profile Picture</div>
-          <div class="card-body text-center">
-            <img
-              class="img-account-profile rounded-circle mb-2"
-              src="/image/<%= user.avatar%>"
-              alt
-            />
-            <div class="small font-italic text-muted mb-4">
+    <div class="container-xl vh-100 px-4 mt-4">
+      <hr class="mt-0 mb-4" />
+      <div class="row">
+        <div class="col-xl-4">
+          <div class="card mb-4 mb-xl-0">
+            <div class="card-header">Profile Picture</div>
+            <div class="card-body text-center">
+              <img
+                height="200px"
+                width="200px"
+                class="img-account-profile rounded-circle mb-2"
+                src="/image/<%= user.avatar%>"
+                alt
+              />
+              <div class="small font-italic text-muted mb-4"></div>
+              <input
+                type="file"
+                id="avatarInput"
+                accept="image/jpeg, image/png"
+                style="display: none"
+              />
             </div>
-            <input
-              type="file"
-              id="avatarInput"
-              accept="image/jpeg, image/png"
-              style="display: none"
-            />
           </div>
         </div>
-      </div>
-      <div class="col-xl-8">
-        <div class="card mb-4">
-          <div class="card-header">Account Details</div>
-          <div class="card-body">
-            <form id="profileForm">
-              <div class="mb-3">
-                <label class="small mb-1" for="inputUsername">Username</label>
-                <input
-                  class="form-control"
-                  id="inputUsername"
-                  type="text"
-                  placeholder="Enter your username"
-                  value="<%= user.username %>"
-                  readonly
-                />
-                <div id="usernameValidation" class="text-danger"></div>
-              </div>
-              <div class="mb-3">
-                <label class="small mb-1" for="inputRole">Role</label>
-                <input
-                  class="form-control"
-                  id="inputRole"
-                  type="text"
-                  value="<%= user.role %>"
-                  readonly
-                />
-              </div>
-              <div class="mb-3">
-                <label class="small mb-1" for="inputName">Name</label>
-                <input
-                  class="form-control"
-                  id="inputName"
-                  type="text"
-                  value="<%= user.name %>"
-                  readonly
-                />
-                <div id="nameValidation" class="text-danger"></div>
-              </div>
-              <div class="mb-3">
-                <label class="small mb-1" for="inputName">Address</label>
-                <input
-                  class="form-control"
-                  id="inputName"
-                  type="text"
-                  value="<%= user.address %>"
-                  readonly
-                />
-                <div id="nameValidation" class="text-danger"></div>
-              </div>
-              <div class="row gx-3 mb-3">
-                <div class="col-md-6" id="businessNameContainer">
-                  <label class="small mb-1" for="inputBusinessName"
-                    >Business Name</label
-                  >
+        <div class="col-xl-8">
+          <div class="card mb-4">
+            <div class="card-header">Account Details</div>
+            <div class="card-body">
+              <form id="profileForm">
+                <div class="mb-3">
+                  <label class="small mb-1" for="inputUsername">Username</label>
                   <input
                     class="form-control"
-                    id="inputBusinessName"
+                    id="inputUsername"
                     type="text"
-                    placeholder="Enter your Business Name"
-                    value="<%= user?.businessName %>"
+                    placeholder="Enter your username"
+                    value="<%= user.username %>"
+                    readonly
+                  />
+                  <div id="usernameValidation" class="text-danger"></div>
+                </div>
+                <div class="mb-3">
+                  <label class="small mb-1" for="inputRole">Role</label>
+                  <input
+                    class="form-control"
+                    id="inputRole"
+                    type="text"
+                    value="<%= user.role %>"
                     readonly
                   />
                 </div>
-                <div class="col-md-6" id="businessAddressContainer">
-                  <label class="small mb-1" for="inputBusinessAddress"
-                    >Business Address</label
+                <div class="mb-3">
+                  <label class="small mb-1" for="inputName">Name</label>
+                  <input
+                    class="form-control"
+                    id="inputName"
+                    type="text"
+                    value="<%= user.name %>"
+                    readonly
+                  />
+                  <div id="nameValidation" class="text-danger"></div>
+                </div>
+                <div class="mb-3">
+                  <label class="small mb-1" for="inputName">Address</label>
+                  <input
+                    class="form-control"
+                    id="inputName"
+                    type="text"
+                    value="<%= user.address %>"
+                    readonly
+                  />
+                  <div id="nameValidation" class="text-danger"></div>
+                </div>
+                <div class="row gx-3 mb-3">
+                  <div class="col-md-6" id="businessNameContainer">
+                    <label class="small mb-1" for="inputBusinessName"
+                      >Business Name</label
+                    >
+                    <input
+                      class="form-control"
+                      id="inputBusinessName"
+                      type="text"
+                      placeholder="Enter your Business Name"
+                      value="<%= user?.businessName %>"
+                      readonly
+                    />
+                  </div>
+                  <div class="col-md-6" id="businessAddressContainer">
+                    <label class="small mb-1" for="inputBusinessAddress"
+                      >Business Address</label
+                    >
+                    <input
+                      class="form-control"
+                      id="inputBusinessAddress"
+                      type="text"
+                      value="<%= user?.businessAddress %>"
+                      readonly
+                    />
+                  </div>
+                </div>
+                <!-- Distribution Hubs Select for Shipper -->
+                <div class="mb-3" id="distributionHubContainer">
+                  <label class="small mb-1" for="inputDistributionHub"
+                    >Distribution Hub</label
                   >
                   <input
                     class="form-control"
-                    id="inputBusinessAddress"
+                    id="inputLocation"
                     type="text"
-                    value="<%= user?.businessAddress %>"
+                    value="<%= hub?.name %>"
                     readonly
                   />
                 </div>
-              </div>
-              <!-- Distribution Hubs Select for Shipper -->
-              <div
-                class="mb-3"
-                id="distributionHubContainer"
-              >
-                <label class="small mb-1" for="inputDistributionHub"
-                  >Distribution Hub</label
-                >
-                <input
-                  class="form-control"
-                  id="inputLocation"
-                  type="text"
-                  value="<%= hub?.name %>"
-                  readonly
-                />
-              </div>
-              <!-- End of Distribution Hubs Select -->
-              <a href="/profile/edit" class="btn btn-primary">Edit</a>
+                <!-- End of Distribution Hubs Select -->
+                <a href="/profile/edit" class="btn btn-primary">Edit</a>
 
-              <button
-                class="btn btn-success"
-                type="button"
-                id="saveProfileBtn"
-                style="display: none"
-              >
-                Save Profile
-              </button>
-            </form>
+                <button
+                  class="btn btn-success"
+                  type="button"
+                  id="saveProfileBtn"
+                  style="display: none"
+                >
+                  Save Profile
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <%- include('./partials/footer.ejs') %>
-</body>
+    <%- include('./partials/footer.ejs') %>
+  </body>
 </html>
 <style>
-  /* Reset some default styles */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+ body{margin-top:20px;
+  background-color:#f2f6fc;
+  color:#69707a;
   }
+ 
 
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
+  .img-account-profile {
+      height: 10rem;
   }
-
-  .profile-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  .rounded-circle {
+      border-radius: 50% !important;
   }
-
-  .profile-header h1 {
-    font-size: 28px;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #ccc;
-    color: #333;
+  .card {
+      box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
   }
-
-  .profile-details {
-    text-align: center;
+  .card .card-header {
+      font-weight: 500;
   }
-
-  .profile-details img {
-    max-width: 150px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  .card-header:first-child {
+      border-radius: 0.35rem 0.35rem 0 0;
   }
-
-  .profile-details h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #333;
+  .card-header {
+      padding: 1rem 1.35rem;
+      margin-bottom: 0;
+      background-color: rgba(33, 40, 50, 0.03);
+      border-bottom: 1px solid rgba(33, 40, 50, 0.125);
   }
-
-  .profile-details p {
-    font-size: 16px;
-    margin-bottom: 10px;
-    color: #555;
+  .form-control, .dataTable-input {
+      display: block;
+      width: 100%;
+      padding: 0.875rem 1.125rem;
+      font-size: 0.875rem;
+      font-weight: 400;
+      line-height: 1;
+      color: #69707a;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #c5ccd6;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border-radius: 0.35rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
-
-  .profile-details span {
-    font-weight: bold;
+  
+  .nav-borders .nav-link.active {
+      color: #0061f2;
+      border-bottom-color: #0061f2;
   }
-
-  .profile-details input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f0f0f0;
-    color: #333;
+  .nav-borders .nav-link {
+      color: #69707a;
+      border-bottom-width: 0.125rem;
+      border-bottom-style: solid;
+      border-bottom-color: transparent;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      padding-left: 0;
+      padding-right: 0;
+      margin-left: 1rem;
+      margin-right: 1rem;
   }
-
   .profile-details button {
     background-color: #007bff;
     color: #fff;
@@ -221,94 +212,5 @@
     border-radius: 5px;
     transition: background-color 0.3s ease;
   }
-
-  .profile-details button:hover {
-    background-color: #0056b3;
-  }
-
-  .profile-details select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f0f0f0;
-    color: #333;
-  }
-
-  .profile-password h2 {
-    font-size: 20px;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    color: #333;
-  }
-
-  .profile-password label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #555;
-  }
-
-  .profile-password input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f0f0f0;
-    color: #333;
-  }
-
-  .profile-password button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 12px 24px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-
-  .profile-password button:hover {
-    background-color: #0056b3;
-  }
-
-  /* Additional styling for the Role dropdown */
-  .profile-details label {
-    display: block;
-    margin-top: 20px;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-  }
-
-  /* Add this CSS for the "Business Address" input */
-  #businessAddress {
-    margin-top: 10px; /* Add some space between fields */
-  }
-
-  /* Add more CSS styles as needed */
-
-  /* Colorful Theme */
-  .profile-container {
-    background-color: #f7f7f7; /* Light gray background */
-    color: #333; /* Dark text color */
-  }
-
-  .profile-details input,
-  .profile-details select {
-    background-color: #f0f0f0; /* Light gray input background */
-    color: #333; /* Dark text color for inputs */
-    border: 1px solid #ccc; /* Light gray border */
-  }
-
-  .profile-details button {
-    background-color: #ff6b6b; /* Red button background color */
-    color: #fff; /* White text color for buttons */
-  }
-
-  .profile-details button:hover {
-    background-color: #ff4040; /* Darker red on hover */
-  }
+  
 </style>
