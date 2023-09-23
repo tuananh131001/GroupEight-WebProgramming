@@ -17,7 +17,7 @@ module.exports = function (app) {
       const hub = await Hub.findById(req.user.distributionHub);
       res.render("profile", { user: req.user, hub });
     } else {
-      res.render("profile", { user: req.user });
+      res.render("profile", { user: req.user, hub: null });
     }
   });
 
