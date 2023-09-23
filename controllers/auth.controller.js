@@ -68,7 +68,7 @@ exports.signUpVendor = (req, res) => {
 exports.signUpShipper = (req, res) => {
   try {
     signUpGeneric("shipper", req.body);
-    req.flash("success_msg", "Customer created successfully");
+    req.flash("success_msg", "Shipper created successfully");
     res.redirect("/login");
   } catch (error) {
     req.flash("error_msg", "Unexpected error occurred", error.message);

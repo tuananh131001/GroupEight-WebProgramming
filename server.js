@@ -50,6 +50,33 @@ require("./routes/index.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/image.routes")(app);
 
+const Hub = db.hub;
+
+const hubs = [
+  {
+    name: "Ho Chi Minh",
+    address: "Ho Chi Minh",
+  },
+  {
+    name: "Da Nang",
+    address: "Da Nang",
+  },
+  {
+    name: "Hanoi",
+    address: "Hanoi",
+  },
+];
+
+Hub.insertMany(hubs)
+  .then(() => {
+    console.log("Hubs added successfully");
+  })
+  .catch((err) => {
+    if (err.code === 11000) {
+      console.log("Hubs already exist");
+    }
+  });
+
 mongoose
   .connect(db.mongoDBUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connected"))

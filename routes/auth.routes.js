@@ -1,6 +1,8 @@
 const controller = require("../controllers/auth.controller");
 const verifySignUp = require("../middleware/verifySignUp");
 const passport = require("passport");
+const db = require("../models/init");
+const Hub = db.hub;
 
 module.exports = function (app) {
   app.use(function (req, res, next) {
@@ -17,7 +19,15 @@ module.exports = function (app) {
 
   app.get("/register-vendor", (req, res) => res.render("register-vendor"));
 
-  app.get("/register-shipper", (req, res) => res.render("register-shipper"));
+  app.get("/register-shipper", async (req, res) => {
+    try {
+      const hubs = await Hub.find({});
+      res.render("register-shipper", { hubs });
+    } catch (error) {
+      req.flash("error_msg", "Unexpected error occurred", error.message);
+      res.redirect("back");
+    }
+  });
 
   app.get("/logout", function (req, res, next) {
     req.logout(function (err) {
@@ -49,7 +59,6 @@ module.exports = function (app) {
     [verifySignUp.checkDuplicateUsername, verifySignUp.checkRolesExisted],
     controller.signUpShipper
   );
-
 
   app.post(
     "/login",

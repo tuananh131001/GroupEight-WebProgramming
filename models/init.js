@@ -8,6 +8,8 @@ db.mongoDBUrl = dbConfig.mongoDBUrl;
 
 db.users = require("./user.model.js");
 db.image = require("./image.model.js");
+db.hub = require("./hub.model.js");
+
 
 db.ROLES = ["customer", "vendor", "shipper"];
 
