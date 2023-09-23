@@ -28,7 +28,7 @@ exports.getMyCart = async (req, res) => {
     try {
       const customerId = req.user._id;
   
-      const cart = await Product.find({ customer: customerId });
+      const cart = await Cart.find({ customer: customerId });
   
       res.render("shoppingCart", { cart, user: req.user });
     } catch (error) {
