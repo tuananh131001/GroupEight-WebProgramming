@@ -33,6 +33,14 @@
       </li>
       <% }); %>
     </ul>
+
+    <h2 class="mt-5 mb-4">Completed Orders</h2>
+
+    <% deliveredOrders.forEach(order => { %>
+      <li class="list-group-item">
+        <a href="/order/<%= order._id %>" class="text-primary">Order ID: <%= order._id %></a>
+      </li>
+      <% }); %>
   </div>
   <%- include('./partials/footer.ejs') %>
 

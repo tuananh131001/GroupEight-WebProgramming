@@ -64,7 +64,12 @@ module.exports = function (app) {
         })
       );
 
-      res.render("shipper-orders", { orders: orderProducts });
+      const deliveredOrders = await Order.find({
+        distributionHub: shipper.distributionHub,
+        status: "delivered",
+      });
+
+      res.render("shipper-orders", { orders: orderProducts, deliveredOrders });
     } catch (err) {
       res.status(500).send("Internal Server Error");
     }
