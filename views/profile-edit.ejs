@@ -90,7 +90,7 @@
                 id="distributionHub"
                 name="distributionHub"
               >
-                <% hubs.forEach(hub => { %>
+                <% hubs?.forEach(hub => { %>
                 <option value=<%= hub._id %>><%= hub.name %></option>
                 <% }); %>
               </select>

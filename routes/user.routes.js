@@ -23,9 +23,9 @@ module.exports = function (app) {
 
   app.get("/profile/edit", ensureAuthenticated, async (req, res) => {
     if (req.user.role === "customer") {
-      res.render("profile-edit", { user: req.user });
+      res.render("profile-edit", { user: req.user, hubs: null });
     } else if (req.user.role === "vendor") {
-      res.render("profile-edit", { user: req.user });
+      res.render("profile-edit", { user: req.user, hubs: null });
     } else if (req.user.role === "shipper") {
       const hubs = await Hub.find({});
       res.render("profile-edit", { user: req.user, hubs });
