@@ -21,7 +21,7 @@
           />
           <div class="media-body">
             <h5 class="mt-0 mb-1"><%= item.name %></h5>
-            $<%= item.price %> x <%= item.quantity %>
+            $<%= item.price %> 
             <form action="/cart/delete/<%= item._id %>" method="POST" class="mt-2">
               <button type="submit" class="btn btn-danger btn-sm">
                 Remove
