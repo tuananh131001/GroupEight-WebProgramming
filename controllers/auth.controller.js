@@ -1,8 +1,7 @@
 const db = require("../models/init");
 const User = db.users;
-const LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require("passport-local").Strategy;
 const Image = db.image;
-
 
 var bcrypt = require("bcryptjs");
 
@@ -15,11 +14,28 @@ const signUpGeneric = async (user_type, request_body) => {
     businessName,
     businessAddress,
     distributionHub,
-    avatar
+    avatar,
   } = request_body;
 
   if (!username || !password) {
     throw new Error("Missing required fields");
+  }
+
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/;
+
+  if (!passwordRegex.test(password)) {
+    throw new Error(
+      "Password must contain at least one upper case letter, at least one lower case letter, at least one digit, at least one special letter in the set !@#$%^&*, NO other kind of characters, has a length from 8 to 20 characters."
+    );
+  }
+
+  const usernameRegex = /^[a-zA-Z0-9]+$/;
+
+  if (!usernameRegex.test(username)) {
+    throw new Error(
+      "Username must contain only letters (lower and upper case) and digits, has a length from 8 to 15 characters, unique."
+    );
   }
 
   if (user_type === "customer") {
@@ -73,7 +89,6 @@ exports.signUpCustomer = async (req, res) => {
 };
 
 exports.signUpVendor = async (req, res) => {
-  
   try {
     await signUpGeneric("vendor", req.body);
     req.flash("success_msg", "Vendor created successfully");
