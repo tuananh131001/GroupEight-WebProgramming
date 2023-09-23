@@ -1,5 +1,6 @@
 const controller = require("../controllers/auth.controller");
 const verifySignUp = require("../middleware/verifySignUp");
+const uploadImage = require("../middleware/uploadImage");
 const passport = require("passport");
 const db = require("../models/init");
 const Hub = db.hub;
@@ -42,6 +43,7 @@ module.exports = function (app) {
   app.post(
     "/register/customer",
     [verifySignUp.checkDuplicateUsername, verifySignUp.checkRolesExisted],
+    uploadImage.single("avatar"),
     controller.signUpCustomer
   );
   app.post(
@@ -52,11 +54,13 @@ module.exports = function (app) {
       verifySignUp.checkDuplicateBusName,
       verifySignUp.checkDuplicateBusAddress,
     ],
+    uploadImage.single("avatar"),
     controller.signUpVendor
   );
   app.post(
     "/register/shipper",
     [verifySignUp.checkDuplicateUsername, verifySignUp.checkRolesExisted],
+    uploadImage.single("avatar"),
     controller.signUpShipper
   );
 

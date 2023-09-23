@@ -1,6 +1,8 @@
 const db = require("../models/init");
 const User = db.users;
 const LocalStrategy = require('passport-local').Strategy;
+const Image = db.image;
+
 
 var bcrypt = require("bcryptjs");
 
@@ -13,6 +15,7 @@ const signUpGeneric = async (user_type, request_body) => {
     businessName,
     businessAddress,
     distributionHub,
+    avatar
   } = request_body;
 
   if (user_type === "customer") {
@@ -21,6 +24,7 @@ const signUpGeneric = async (user_type, request_body) => {
       passwordHash: bcrypt.hashSync(password, 8),
       name: name,
       address: address,
+      avatar: avatar,
       role: user_type,
     });
   } else if (user_type === "vendor") {
@@ -29,6 +33,7 @@ const signUpGeneric = async (user_type, request_body) => {
       passwordHash: bcrypt.hashSync(password, 8),
       name: name,
       businessName: businessName,
+      avatar: avatar,
       businessAddress: businessAddress,
       role: user_type,
     });
@@ -37,6 +42,7 @@ const signUpGeneric = async (user_type, request_body) => {
       username: username,
       passwordHash: bcrypt.hashSync(password, 8),
       name: name,
+      avatar: avatar,
       distributionHub: distributionHub,
       role: user_type,
     });
@@ -45,10 +51,18 @@ const signUpGeneric = async (user_type, request_body) => {
 
 exports.signUpCustomer = async (req, res) => {
   try {
+    const file = req.file.buffer;
+    const image = await Image.create({
+      file: file,
+    });
+
+    // add image id to user
+    req.body.avatar = image._id;
     await signUpGeneric("customer", req.body);
     req.flash("success_msg", "Customer created successfully");
     res.redirect("/login");
   } catch (error) {
+    // handle missing file
     req.flash("error_msg", "Unexpected error occurred", error.message);
     res.redirect("back");
   }

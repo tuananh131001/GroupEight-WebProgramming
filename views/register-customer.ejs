@@ -13,11 +13,15 @@
   <body>
     <%- include('./partials/header.ejs') %>
     <div class="container">
-      <form action="/register/customer" method="POST">
+      <form
+        action="/register/customer"
+        method="POST"
+        enctype="multipart/form-data"
+      >
         <div class="form-group py-1">
-          <label class="py-1" for="name">Name</label>
+          <label class="pb-1" for="name">Name</label>
           <input
-            type="name"
+            type="text"
             id="name"
             name="name"
             class="form-control"
@@ -25,6 +29,7 @@
             value="<%= typeof name != 'undefined' ? name : '' %>"
           />
         </div>
+
         <div class="form-group py-1">
           <label class="pb-1" for="address">Address</label>
           <input
@@ -64,6 +69,18 @@
           name="role"
           class="form-control"
         />
+        <div class="input-group pb-1">
+          <label class="input-group-text" for="inputGroupFile01">
+            Product Picture</label
+          >
+          <input
+            type="file"
+            name="avatar"
+            class="form-control"
+            id="inputGroupFile01"
+            accept="image/jpeg, image/png"
+          />
+        </div>
         <button type="submit" class="btn btn-primary btn-block pt-1">
           Register
         </button>

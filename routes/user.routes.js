@@ -17,11 +17,11 @@ module.exports = function (app) {
 
   app.get("/profile/edit", ensureAuthenticated, (req, res) => {
     if (req.user.role === "customer") {
-      res.render("customer/profile-edit", { user: req.user });
+      res.render("profile-edit", { user: req.user });
     } else if (req.user.role === "vendor") {
-      res.render("vendor/profile-edit", { user: req.user });
+      res.render("profile-edit", { user: req.user });
     } else if (req.user.role === "shipper") {
-      res.render("shipper/profile-edit", { user: req.user });
+      res.render("profile-edit", { user: req.user });
     } else {
       req.flash("error_msg", "Unexpected error occurred", error.message);
       res.redirect("back");
