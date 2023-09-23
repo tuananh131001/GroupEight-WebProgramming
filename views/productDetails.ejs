@@ -30,21 +30,26 @@
                             <span>$<%= product.price %></span>
                         </div>
                         <p class="lead"><%= product.description %></p>
-                        <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                <i class="bi-cart-fill me-1"></i>
-                                Add to cart
-                            </button>
-                        </div>
+                <form action="/products/add-to-cart" method="POST">
+                    <input type="hidden" name="name" value="<%= product.name %>">
+                    <input type="hidden" name="price" value="<%= product.price %>">
+                    <input type="hidden" name="image" value="/public/images/<%= product.image %>">
+                    <div class="d-flex">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" name="quantity" value="1" style="max-width: 3rem" />
+                        <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            Add to cart
+                        </button>
                     </div>
-                </div>
-            </div>
-        </section>
-        <!-- Footer-->
-        <%- include('./partials/footer.ejs') %>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+                </form>
+    </div>
+</div>
+</div>
+</section>
+<!-- Footer-->
+<%- include('./partials/footer.ejs') %>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    </body>
+</body>
 </html>
