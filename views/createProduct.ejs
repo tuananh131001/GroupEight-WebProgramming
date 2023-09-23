@@ -1,55 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vendor page</title>
-</head>
-<body>
-  <%- include('./partials/header.ejs') %>
+  </head>
+  <body>
+    <%- include('./partials/header.ejs') %>
+
     <div class="container">
-    <h1><b>Add Your Product</b></h1>
-    <form action="/products/vendors-only/my-products" method="POST" enctype="multipart/form-data" class="form-group pb-2">
+      <h1><b>Add Your Product</b></h1>
+      <form
+        action="/products/vendors-only/my-products"
+        method="POST"
+        enctype="multipart/form-data"
+        class="form-group pb-2"
+      >
         <label class="pb-1" for="product-title">Product Title</label>
         <input
           type="name"
           id="product-title"
           name="name"
-          class="form-control"
+          class="form-control mb-2"
           placeholder="Enter Product Name Here"
           maxlength="20"
         />
-      <div class="input-group pb-1">
-        <label class="input-group-text" for="inputGroupFile01"> Product Picture</label>
-        <input type="file" name="image" class="form-control" id="inputGroupFile01" accept="image/jpeg, image/png">
-      </div>
-    
-      <div class="form-group pb-1">
-        <label class="pb-1" for="price">Price</label>
-        <input
-          type="number"
-          id="price"
-          name="price"
-          class="form-control"
-          placeholder="Enter Price Here"
-        />
-      </div>
-      <div class="form-group py-1">
-        <label class="pb-1" for="description">Description</label> <br>
-        <textarea 
-            name="description" 
-            id="description" 
-            style="width: 100%;"
+        <div class="input-group pb-2">
+          <label class="input-group-text" for="inputGroupFile01">
+            Product Picture</label
+          >
+          <input
+            type="file"
+            name="image"
+            class="form-control"
+            id="inputGroupFile01"
+            accept="image/jpeg, image/png"
+          />
+        </div>
+
+        <div class="form-group pb-1">
+          <label class="pb-1" for="price">Price</label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            class="form-control"
+            placeholder="Enter Price Here"
+          />
+        </div>
+        <div class="form-floating py-1">
+          <textarea
+            name="description"
+            id="description"
+            class="form-control"
             rows="10"
-            spellcheck="false" 
+            spellcheck="false"
             maxlength="500"
-            placeholder="Write Description Here">
-
-        </textarea>
-      </div>
-      <button type="submit" class="btn btn-primary btn-block pt-1">Add</button>
-    </form>
-
-      <%- include('./partials/footer.ejs') %>
-</body>
+            placeholder="Write Description Here"
+          >
+          </textarea>
+          <label for="floatingTextarea" for="description">Description</label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mt-5">
+          Add
+        </button>
+      </form>
+    </div>
+    <%- include('./partials/footer.ejs') %>
+  </body>
 </html>
