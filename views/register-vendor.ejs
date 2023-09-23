@@ -10,81 +10,84 @@
 <body>
   <%- include('./partials/header.ejs') %>
 
-  <form action="/register/customer-vendor" method="POST">
-    <div class="form-group py-1">
-      <label class="pb-1" for="name">Name</label>
-      <input
-        type="name"
-        id="name"
-        name="name"
-        class="form-control"
-        placeholder="Enter Name"
-        value="<%= typeof name != 'undefined' ? name : '' %>"
-      />
-    </div>
-    <div class="input-group mb-3">
-      <label class="input-group-text" for="inputGroupFile01"> profile picture</label>
-      <input type="file" class="form-control" id="inputGroupFile01">
-    </div>
+  <div class="container">
+    <form action="/register/customer-vendor" method="POST">
+      <div class="form-group pb-1">
+        <label class="pb-1" for="name">Name</label>
+        <input
+          type="name"
+          id="name"
+          name="name"
+          class="form-control"
+          placeholder="Enter Name"
+          value="<%= typeof name != 'undefined' ? name : '' %>"
+        />
+      </div>
+      <div class="input-group pb-1">
+        <label class="input-group-text" for="inputGroupFile01"> profile picture</label>
+        <input type="file" class="form-control" id="inputGroupFile01">
+      </div>
+    
+      <div class="form-group pb-1">
+        <label class="pb-1" for="businessName">Business name</label>
+        <input
+          type="name"
+          id="businessName"
+          name="businessName"
+          class="form-control"
+          placeholder="Enter businessName"
+        />
+      </div>
+      <div class="form-group py-1">
+        <label class="pb-1" for="businessName">Business Address</label>
+        <input
+          type="name"
+          id="businessAddress"
+          name="businessAddress"
+          class="form-control"
+          placeholder="Enter businessAddress"
+        />
+      </div>
+      <div class="form-group py-1">
+        <label class="pb-1" for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          placeholder="Enter Email"
+          value="<%= typeof email != 'undefined' ? email : '' %>"
+        />
+      </div>
+      <div class="form-group py-1">
+        <label class="pb-1" for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          placeholder="Create Password"
+          value="<%= typeof password != 'undefined' ? password : '' %>"
+        />
+      </div>
+      <div class="form-group py-1 pb-2">
+        <label class="pb-1" for="password2">Confirm Password</label>
+        <input
+          type="password"
+          id="password2"
+          name="password2"
+          class="form-control"
+          placeholder="Confirm Password"
+          value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary btn-block pt-1">Register</button>
+    </form>
+    <p class="lead mt-4">Have An Account? <a href="/login">Login</a></p>
+    
+    <p class="lead mt-4">Are you a customer? <a href="/register-customer">Register as a shipper</a></p>
+    <p class="lead mt-4">Are you a shipper? <a href="/register-shipper">Register as a shipper</a></p>
+  </div>
   
-    <div class="form-group py-1">
-      <label class="pb-1" for="businessName">Business name</label>
-      <input
-        type="name"
-        id="businessName"
-        name="businessName"
-        class="form-control"
-        placeholder="Enter businessName"
-      />
-    </div>
-    <div class="form-group py-1">
-      <label class="pb-1" for="businessName">Business Address</label>
-      <input
-        type="name"
-        id="businessAddress"
-        name="businessAddress"
-        class="form-control"
-        placeholder="Enter businessAddress"
-      />
-    </div>
-    <div class="form-group py-1">
-      <label class="pb-1" for="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        class="form-control"
-        placeholder="Enter Email"
-        value="<%= typeof email != 'undefined' ? email : '' %>"
-      />
-    </div>
-    <div class="form-group py-1">
-      <label class="pb-1" for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        class="form-control"
-        placeholder="Create Password"
-        value="<%= typeof password != 'undefined' ? password : '' %>"
-      />
-    </div>
-    <div class="form-group py-1 pb-2">
-      <label class="pb-1" for="password2">Confirm Password</label>
-      <input
-        type="password"
-        id="password2"
-        name="password2"
-        class="form-control"
-        placeholder="Confirm Password"
-        value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
-      />
-    </div>
-    <button type="submit" class="btn btn-primary btn-block pt-1">Register</button>
-  </form>
-  <p class="lead mt-4">Have An Account? <a href="/login">Login</a></p>
-  
-  <p class="lead mt-4">Are you a customer? <a href="/register-customer">Register as a shipper</a></p>
-  <p class="lead mt-4">Are you a shipper? <a href="/register-shipper">Register as a shipper</a></p>
   <%- include('./partials/footer.ejs') %>
 </body>

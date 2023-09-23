@@ -22,7 +22,7 @@ module.exports = function (app) {
   app.get("/register-shipper", async (req, res) => {
     try {
       const hubs = await Hub.find({});
-      res.render("register-shipper", { hubs });
+      await res.render("register-shipper", { hubs});
     } catch (error) {
       req.flash("error_msg", "Unexpected error occurred", error.message);
       res.redirect("back");

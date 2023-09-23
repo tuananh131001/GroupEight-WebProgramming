@@ -10,9 +10,16 @@
 <body>
     <%- include('./partials/header.ejs') %>
     <!-- Search Form -->
-    <%- include('./partials/search.ejs') %>
+    <div class="container">
+        <div class="row pb-2">
+            <%- include('./partials/search.ejs') %>
+        </div>
+    
     <!-- Filter Form -->
-    <%- include('./partials/filterProducts.ejs') %>
+        <div class="row">
+            <%- include('./partials/filterProducts.ejs') %>
+        </div>
+    </div>
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
