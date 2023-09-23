@@ -26,7 +26,7 @@ module.exports = function (app) {
   app.get(
     "/products/vendors-only/my-products",
     checkUserRole("vendor"),
-    productController.getMyProducts
+    productController.getVendorMyProducts
   );
   app.post(
     "/products/vendors-only/my-products/:id/delete",

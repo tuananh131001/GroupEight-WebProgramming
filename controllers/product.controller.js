@@ -1,24 +1,29 @@
+const { default: mongoose } = require("mongoose");
 const db = require("../models/init");
 const Product = db.product;
+const Image = db.image;
 
 // Create a new product
 exports.createProduct = async (req, res, next) => {
   // Extract product data from the request body
   const { name, price, description } = req.body;
-  // Handle image upload using multer
-  const imageData = req.file.filename; // Binary image data
+  const imageData = req.file.buffer; 
   try {
-    // Create a new product instance with the image data
+    const image = await Image.create({
+      file: imageData,
+    });
     const newProduct = new Product({
       name,
       price,
       description,
-      image: imageData,
+      image: image._id,
       vendor: req.user._id,
     });
 
     // Save the new product to the database
     await newProduct.save();
+    // make new document in image collection
+
     // Render the EJS view
     req.flash("success_msg", `Product ${newProduct._id}  created successfully`);
     res.redirect("/products/vendors-only/my-products");
@@ -42,10 +47,12 @@ exports.getAllProducts = async (req, res) => {
 
 // Get a specific product by Name
 exports.getProductByName = async (req, res) => {
-    try {
+  try {
     const query = req.query.query;
 
-    const products = await Product.find({ name: { $regex: query, $options: 'i' } });
+    const products = await Product.find({
+      name: { $regex: query, $options: "i" },
+    });
 
     if (!products) {
       req.flash("error_msg", "Product not found");
@@ -132,7 +139,7 @@ exports.getFilteredProducts = async (req, res) => {
     const products = await Product.aggregate(pipeline);
 
     // Render a list of filtered products using an EJS template
-    res.render("welcome", { products , user: req.user });
+    res.render("welcome", { products, user: req.user });
   } catch (error) {
     req.flash("error_msg", "Unexpected error occurred", error.message);
     res.redirect("back");
@@ -140,13 +147,13 @@ exports.getFilteredProducts = async (req, res) => {
 };
 
 // Get my products as a vendor
-exports.getMyProducts = async (req, res) => {
+exports.getVendorMyProducts = async (req, res) => {
   try {
     const vendorId = req.user._id;
 
     const products = await Product.find({ vendor: vendorId });
 
-    res.render("my-products", { products, user: req.user });
+    res.render("vendor/my-products", { products, user: req.user });
   } catch (error) {
     req.flash("error_msg", "Unexpected error occurred", error.message);
     res.redirect("back");
