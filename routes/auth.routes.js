@@ -20,6 +20,8 @@ module.exports = function (app) {
 
   app.get("/register-vendor", (req, res) => res.render("register-vendor"));
 
+ 
+
   app.get("/register-shipper", async (req, res) => {
     try {
       const hubs = await Hub.find({});
