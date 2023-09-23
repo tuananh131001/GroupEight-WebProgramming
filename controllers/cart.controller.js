@@ -8,8 +8,6 @@ exports.addToCart = async (req, res) => {
     const existingCartItem = await Cart.findOne({ name });
 
     if (existingCartItem) {
-      // Increment the quantity if the item exists
-      existingCartItem.quantity += 1;
       await existingCartItem.save();
     } else {
       // Create a new cart item if it doesn't exist
