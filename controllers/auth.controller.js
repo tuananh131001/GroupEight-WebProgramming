@@ -18,6 +18,10 @@ const signUpGeneric = async (user_type, request_body) => {
     avatar
   } = request_body;
 
+  if (!username || !password) {
+    throw new Error("Missing required fields");
+  }
+
   if (user_type === "customer") {
     await User.create({
       username: username,
@@ -69,6 +73,7 @@ exports.signUpCustomer = async (req, res) => {
 };
 
 exports.signUpVendor = async (req, res) => {
+  
   try {
     await signUpGeneric("vendor", req.body);
     req.flash("success_msg", "Vendor created successfully");
