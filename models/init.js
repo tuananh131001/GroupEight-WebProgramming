@@ -14,5 +14,5 @@ db.hub = require("./hub.model.js");
 db.ROLES = ["customer", "vendor", "shipper"];
 
 db.product = require("./product.model.js");
-
+db.cart = require("./cart.model.js");
 module.exports = db;
