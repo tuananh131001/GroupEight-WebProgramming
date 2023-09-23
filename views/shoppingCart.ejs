@@ -39,13 +39,13 @@
       <h3 class="my-4">Total Price: $<%= totalPrice %></h3>
 
       <form action="/order" method="POST" class="mb-3">
-        <% carts.forEach((item) => { %>
+        <% var products = carts.map(item => ({ name: item.name, price:
+        item.price, image: item.image })); %>
         <input
           type="hidden"
-          name="products[productId][]"
-          value="<%= item.productId %>"
+          name="products"
+          value="<%= JSON.stringify(products) %>"
         />
-        <% }); %>
 
         <input type="hidden" name="total" value="<%= totalPrice %>" />
 

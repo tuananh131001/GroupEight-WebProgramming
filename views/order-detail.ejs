@@ -3,19 +3,19 @@
   <div class="container">
     <h1>Products:</h1>
     <div class="d-flex flex-row flex-wrap">
-      <% order.product_detail.forEach(product => { %>
+      <% order.products.forEach(product => { %>
       <div class="row mb-4 align-items-center">
         <div class="col-2">
           <img
-            src="/image/<%= product.image %>"
-            alt="<%= product.name %>"
+            src="/image/<%= product?.image %>"
+            alt="<%= product?.name %>"
             class="img-fluid rounded"
           />
         </div>
         <div class="col-10">
-          <h5><%= product.name %></h5>
-          <p class="mb-1">Quantity: <%= product.quantity %></p>
-          <p>Price: $<%= product.price.toFixed(2) %></p>
+          <h5><%= product?.name %></h5>
+          <p class="mb-1">Quantity: <%= product?.quantity %></p>
+          <p>Price: $<%= product?.price.toFixed(2) %></p>
         </div>
       </div>
       <% }); %>

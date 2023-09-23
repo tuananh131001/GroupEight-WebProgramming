@@ -12,7 +12,7 @@
     <h2 class="mb-4">Active Orders</h2>
 
     <ul class="list-group">
-      <% orders.forEach(order => { %>
+      <% orders?.forEach(order => { %>
       <li class="list-group-item">
         <a href="/order/<%= order._id %>" class="text-primary">Order ID: <%= order._id %></a>
 

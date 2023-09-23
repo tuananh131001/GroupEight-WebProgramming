@@ -9,8 +9,9 @@ module.exports = function (app) {
   app.post("/order", checkUserRole("customer"), async (req, res) => {
     const hubs = await Hub.find({});
     const randomHub = hubs[Math.floor(Math.random() * hubs.length)];
+    console.log("product", req.body.products)
     const newOrder = new Order({
-      products: req.body.products.productId,
+      products: JSON.parse(req.body.products),
       total: req.body.total,
       address: req.body.address,
       distributionHub: randomHub._id,
@@ -31,13 +32,7 @@ module.exports = function (app) {
 
   app.get("/order/:id", checkUserRole("shipper"), async (req, res) => {
     const order = await Order.findById(req.params.id);
-    const products = await Promise.all(
-      order.products.map(async (productId) => {
-        const product = await Product.findById(productId);
-        return product;
-      })
-    );
-    order.product_detail = products;
+    console.log("order", order);
 
     res.render("order-detail", { order });
   });
@@ -51,38 +46,30 @@ module.exports = function (app) {
         status: "active",
       });
 
-      //use id in order.products.id to find product and combine with order
-      const orderProducts = await Promise.all(
-        orders.map(async (order) => {
-          order.product_detail = await Promise.all(
-            order.products.map(async (productId) => {
-              const product = await Product.findById(productId);
-              return product;
-            })
-          );
-          return order;
-        })
-      );
-
       const deliveredOrders = await Order.find({
         distributionHub: shipper.distributionHub,
         status: "delivered",
       });
+      console.log("orders", orders)
 
-      res.render("shipper-orders", { orders: orderProducts, deliveredOrders });
+      res.render("shipper-orders", { orders: orders || null, deliveredOrders });
     } catch (err) {
       res.status(500).send("Internal Server Error");
     }
 
-    app.post("/order/update/:orderId", checkUserRole("shipper"), async (req, res) => {
-      try {
-        await Order.findByIdAndUpdate(req.params.orderId, {
-          status: req.body.status,
-        });
-        res.redirect("/shipper-orders");
-      } catch (err) {
-        res.status(500).send("Internal Server Error");
+    app.post(
+      "/order/update/:orderId",
+      checkUserRole("shipper"),
+      async (req, res) => {
+        try {
+          await Order.findByIdAndUpdate(req.params.orderId, {
+            status: req.body.status,
+          });
+          res.redirect("/shipper-orders");
+        } catch (err) {
+          res.status(500).send("Internal Server Error");
+        }
       }
-    });
+    );
   });
 };
