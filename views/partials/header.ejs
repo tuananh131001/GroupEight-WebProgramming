@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/public/css/footer.css">
 <nav class="navbar navbar-expand-sm navbar-expand-md navbar-expand-lg bg-primary">
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand">
@@ -5,9 +6,8 @@
             <span class="text-white">Eight shop</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
-            
                 <% if (!user) { %> <!-- If user is not logged in -->
                     <li class="nav-item"><a class="nav-link text-white active" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link text-white active" href="/register">Register</a></li>
@@ -17,7 +17,7 @@
                         <li class="nav-item"><a class="nav-link text-white active" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link text-white active" href="/profile">Profile</a></li>
                         <li class="nav-item"><a class="nav-link text-white active" href="/logout">Logout</a></li>
-                        <li class="nav-item"><a class="nav-link text-white active" href="/carts">Cart</a></li>
+                        <li class="nav-item"><a class="nav-link text-white active" href="/carts"><i class="fa-solid fa-cart-shopping"></i>Cart</a></li>
                     <% } else if (user.role == 'shipper') { %>
                         <li class="nav-item"><a class="nav-link text-white active" href="/shipper-orders">Home</a></li>
                         <li class="nav-item"><a class="nav-link text-white active" href="/profile">Profile</a></li>
