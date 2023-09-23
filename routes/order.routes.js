@@ -39,7 +39,6 @@ module.exports = function (app) {
     );
     order.product_detail = products;
 
-    console.log(order);
     res.render("order-detail", { order });
   });
 
@@ -64,8 +63,6 @@ module.exports = function (app) {
           return order;
         })
       );
-
-      console.log(orderProducts);
 
       res.render("shipper-orders", { orders: orderProducts });
     } catch (err) {
