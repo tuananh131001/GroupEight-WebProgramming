@@ -18,4 +18,12 @@ module.exports = function (app) {
       ? res.render("dashboard", { user: req.user })
       : res.redirect("/login")
   );
+
+  ///support
+
+  app.get("/support", (req, res) => res.render("support"));
+
+  app.get("/privacy-policy", (req, res) => res.render("privacy-policy"));
+  app.get("/about-us", (req, res) => res.render("about-us"));
+
 };
