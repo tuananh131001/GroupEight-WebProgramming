@@ -7,22 +7,26 @@
 
   <body>
     <%- include('./partials/header.ejs') %>
-    <div class="container mt-5 vh-100">
+    <div class="container mt-5 d-flex flex-column">
       <h2 class="mb-4">Shopping Cart</h2>
 
-      <ul class="list-unstyled">
+      <ul class="d-flex flex-row flex-wrap">
         <% carts.forEach((item) => { %>
-        <li class="media mb-3">
+        <li class="d-flex flex-row mb-3 gap-5">
           <img
             height="200px"
             src="/image/<%= item.image %>"
             alt="<%= item.name %>"
             class="mr-3"
           />
-          <div class="media-body">
+          <div class="">
             <h5 class="mt-0 mb-1"><%= item.name %></h5>
-            $<%= item.price %> 
-            <form action="/cart/delete/<%= item._id %>" method="POST" class="mt-2">
+            $<%= item.price %>
+            <form
+              action="/cart/delete/<%= item._id %>"
+              method="POST"
+              class="mt-2"
+            >
               <button type="submit" class="btn btn-danger btn-sm">
                 Remove
               </button>
@@ -36,23 +40,31 @@
 
       <form action="/order" method="POST" class="mb-3">
         <% carts.forEach((item) => { %>
-          <input type="hidden" name="products[productId][]" value="<%= item.productId %>">
+        <input
+          type="hidden"
+          name="products[productId][]"
+          value="<%= item.productId %>"
+        />
         <% }); %>
-    
-        <input type="hidden" name="total" value="<%= totalPrice %>">
-    
+
+        <input type="hidden" name="total" value="<%= totalPrice %>" />
+
         <!-- Add an input field for address -->
         <div class="mb-3">
-            <label for="address" class="form-label">Delivery Address</label>
-            <input type="text" class="form-control" id="address" name="address" required>
+          <label for="address" class="form-label">Delivery Address</label>
+          <input
+            type="text"
+            class="form-control"
+            id="address"
+            name="address"
+            required
+          />
         </div>
-        <input type="hidden" name="cartId" value="<%= carts.id %>">
-    
+        <input type="hidden" name="cartId" value="<%= carts.id %>" />
+
         <button type="submit" class="btn btn-primary">Order</button>
+        <a href="/" class="btn btn-light">Continue Shopping</a>
       </form>
-    
-    
-      <a href="/" class="btn btn-light">Continue Shopping</a>
     </div>
     <%- include('./partials/footer.ejs') %>
   </body>

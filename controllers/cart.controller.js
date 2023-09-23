@@ -2,25 +2,17 @@ const db = require("../models/init");
 const Cart = db.cart;
 
 exports.addToCart = async (req, res) => {
-  const { name, price, image, quantity, productId } = req.body;
+  const { name, price, image, productId } = req.body;
   try {
-    // Check if the item already exists in the cart
-    const existingCartItem = await Cart.findOne({ name });
+    const cartItem = new Cart({
+      productId,
+      name,
+      price,
+      image,
+      customer: req.user._id,
+    });
+    await cartItem.save();
 
-    if (existingCartItem) {
-      await existingCartItem.save();
-    } else {
-      // Create a new cart item if it doesn't exist
-      const cartItem = new Cart({
-        productId,
-        name,
-        price,
-        image,
-        quantity,
-        customer: req.user._id,
-      });
-      await cartItem.save();
-    }
     req.flash("success_msg", `Added to Cart successfully`);
     res.redirect("/");
   } catch (error) {
