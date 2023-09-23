@@ -50,6 +50,8 @@ require("./routes/product.routes")(app);
 require("./routes/index.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/image.routes")(app);
+require("./routes/cart.routes")(app);
+require("./routes/order.routes")(app);
 
 const Hub = db.hub;
 

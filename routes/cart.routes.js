@@ -5,14 +5,18 @@ const uploadImage = require("../middleware/uploadImage");
 module.exports = function (app) {
     // for vendors
     app.get(
-      "/products/shopping-cart",
+      "/carts",
       checkUserRole("customer"),
       cartController.getMyCart
     );
     app.post(
         "/products/add-to-cart",
         checkUserRole("customer"),
-        uploadImage.single("image"),
         cartController.addToCart
+    );
+    app.post(
+      "/cart/delete/:id",
+      checkUserRole("customer"),
+      cartController.deleteCart
     )
 };
