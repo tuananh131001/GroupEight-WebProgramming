@@ -11,21 +11,17 @@
   <%- include('./partials/header.ejs') %>
 
   <div class="container">
-    <form action="/register/customer-vendor" method="POST">
+    <form action="/register/vendor" method="POST">
       <div class="form-group pb-1">
-        <label class="pb-1" for="name">Name</label>
+        <label class="pb-1" for="name">Username</label>
         <input
-          type="name"
-          id="name"
-          name="name"
+          type="text"
+          id="username"
+          name="username"
           class="form-control"
-          placeholder="Enter Name"
+          placeholder="Enter Username"
           value="<%= typeof name != 'undefined' ? name : '' %>"
         />
-      </div>
-      <div class="input-group pb-1">
-        <label class="input-group-text" for="inputGroupFile01"> profile picture</label>
-        <input type="file" class="form-control" id="inputGroupFile01">
       </div>
     
       <div class="form-group pb-1">
@@ -49,17 +45,6 @@
         />
       </div>
       <div class="form-group py-1">
-        <label class="pb-1" for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          class="form-control"
-          placeholder="Enter Email"
-          value="<%= typeof email != 'undefined' ? email : '' %>"
-        />
-      </div>
-      <div class="form-group py-1">
         <label class="pb-1" for="password">Password</label>
         <input
           type="password"
@@ -68,17 +53,6 @@
           class="form-control"
           placeholder="Create Password"
           value="<%= typeof password != 'undefined' ? password : '' %>"
-        />
-      </div>
-      <div class="form-group py-1 pb-2">
-        <label class="pb-1" for="password2">Confirm Password</label>
-        <input
-          type="password"
-          id="password2"
-          name="password2"
-          class="form-control"
-          placeholder="Confirm Password"
-          value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
         />
       </div>
       <button type="submit" class="btn btn-primary btn-block pt-1">Register</button>

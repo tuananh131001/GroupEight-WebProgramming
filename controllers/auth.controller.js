@@ -43,9 +43,9 @@ const signUpGeneric = async (user_type, request_body) => {
   }
 };
 
-exports.signUpCustomer = (req, res) => {
+exports.signUpCustomer = async (req, res) => {
   try {
-    signUpGeneric("customer", req.body);
+    await signUpGeneric("customer", req.body);
     req.flash("success_msg", "Customer created successfully");
     res.redirect("/login");
   } catch (error) {
@@ -54,9 +54,9 @@ exports.signUpCustomer = (req, res) => {
   }
 };
 
-exports.signUpVendor = (req, res) => {
+exports.signUpVendor = async (req, res) => {
   try {
-    signUpGeneric("vendor", req.body);
+    await signUpGeneric("vendor", req.body);
     req.flash("success_msg", "Vendor created successfully");
     res.redirect("/login");
   } catch (error) {
@@ -65,9 +65,9 @@ exports.signUpVendor = (req, res) => {
   }
 };
 
-exports.signUpShipper = (req, res) => {
+exports.signUpShipper = async (req, res) => {
   try {
-    signUpGeneric("shipper", req.body);
+    await signUpGeneric("shipper", req.body);
     req.flash("success_msg", "Shipper created successfully");
     res.redirect("/login");
   } catch (error) {
