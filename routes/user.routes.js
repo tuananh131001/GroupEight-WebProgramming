@@ -1,3 +1,9 @@
+// RMIT University Vietnam
+// Course: COSC2430 Web Programming
+// Semester: 2023B
+// Assessment: Full-stack Web Application
+// Author: Team Eight
+// Acknowledgement: Google , Stackoverflow, w3schools
 const uploadImage = require("../middleware/uploadImage");
 const userController = require("../controllers/user.controller");
 const { ensureAuthenticated } = require("../middleware/auth");

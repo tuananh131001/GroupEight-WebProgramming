@@ -1,3 +1,9 @@
+<!-- // RMIT University Vietnam
+// Course: COSC2430 Web Programming
+// Semester: 2023B
+// Assessment: Full-stack Web Application
+// Author: Team Eight
+// Acknowledgement: Google , Stackoverflow, w3schools -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,7 +14,7 @@
   <body>
     <%- include('./partials/header.ejs') %>
     <div class="container vh-100">
-      <form action="/register/shipper" method="POST">
+      <form action="/register/shipper" method="POST"  enctype="multipart/form-data">
         <div class="form-group py-1">
           <label class="pb-1" for="username">Username</label>
           <input
@@ -45,6 +51,18 @@
             <option value=<%= hub._id %>><%= hub.name %></option>
             <% }); %>
           </select>
+        </div>
+        <div class="input-group py-2">
+          <label class="input-group-text" for="inputGroupFile01">
+            Profile Picture</label
+          >
+          <input
+            type="file"
+            name="avatar"
+            class="form-control"
+            id="inputGroupFile01"
+            accept="image/jpeg, image/png"
+          />
         </div>
 
         <button type="submit" class="btn btn-primary btn-block pt-1">
