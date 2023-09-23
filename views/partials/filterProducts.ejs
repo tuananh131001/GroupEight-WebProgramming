@@ -1,10 +1,22 @@
 <!-- Filter Form -->
 <form method="GET" action="/product/filter/">
-    <label for="minPrice">Minimum Price:</label>
-    <input type="number" name="minPrice" id="minPrice">
-
-    <label for="maxPrice">Maximum Price:</label>
-    <input type="number" name="maxPrice" id="maxPrice">
-
-    <button type="submit">Filter</button>
+    <div class="container">
+        <div class="row pb-2">
+            <div class="col-md-6">
+                <label for="minPrice">Minimum Price:</label>
+                <input type="number" name="minPrice" id="minPrice">
+            </div>
+        
+        </div>
+            
+        <div class="row">
+            <div class="col-6">
+                <label for="maxPrice">Maximum Price:</label>
+                <input type="number" name="maxPrice" id="maxPrice">
+    
+                <button class="btn btn-secondary active" type="submit">Filter</button>
+            </div>
+        </div>
+    </div>
+    
 </form>
