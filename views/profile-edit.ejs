@@ -60,35 +60,37 @@
               />
               <div id="nameValidation" class="text-danger"></div>
             </div>
-            <div class="row gx-3 mb-3">
-              <div class="col-md-6" id="businessNameContainer">
-                <label class="small mb-1" for="businessName"
-                  >Business Name</label
-                >
-                <input
-                  class="form-control"
-                  name="businessName"
-                  id="businessName"
-                  value="<%= user.businessName %>"
-                  type="text"
-                  placeholder="Enter your Business Name"
-                />
+            <% if (user.role === "vendor") { %>
+              <div class="row gx-3 mb-3">
+                <div class="col-md-6" id="businessNameContainer">
+                  <label class="small mb-1" for="businessName"
+                    >Business Name</label
+                  >
+                  <input
+                    class="form-control"
+                    name="businessName"
+                    id="businessName"
+                    value="<%= user.businessName %>"
+                    type="text"
+                    placeholder="Enter your Business Name"
+                  />
+                </div>
+                <div class="col-md-6" id="businessAddressContainer">
+                  <label class="small mb-1" for="businessAddress"
+                    >Business Address</label
+                  >
+                  <input
+                    class="form-control"
+                    name="businessAddress"
+                    id="businessAddress"
+                    value="<%= user.businessAddress %>"
+                    type="text"
+                    placeholder="Enter your Business Address"
+                  />
+                </div>
               </div>
-              <div class="col-md-6" id="businessAddressContainer">
-                <label class="small mb-1" for="businessAddress"
-                  >Business Address</label
-                >
-                <input
-                  class="form-control"
-                  name="businessAddress"
-                  id="businessAddress"
-                  value="<%= user.businessAddress %>"
-                  type="text"
-                  placeholder="Enter your Business Address"
-                />
-              </div>
-            </div>
-            
+            <% } %>
+
             <% if (user.role === "shipper") { %>
               <div class="py-2">
                 <label for="distributionHub">Select Distribution Hub:</label>
