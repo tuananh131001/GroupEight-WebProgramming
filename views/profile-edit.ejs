@@ -38,6 +38,7 @@
                 name="username"
                 value="<%= user.username %>"
                 placeholder="Enter your username"
+                disabled
               />
               <div id="usernameValidation" class="text-danger"></div>
             </div>
@@ -48,18 +49,33 @@
                 <option value="<%= user.role %>"><%= user.role %></option>
               </select>
             </div>
-            <div class="mb-3">
-              <label class="small mb-1" for="inputName">Name</label>
-              <input
-                class="form-control"
-                id="inputName"
-                name="name"
-                type="text"
-                placeholder="Enter your Name"
-                value="<%= user.name %>"
-              />
-              <div id="nameValidation" class="text-danger"></div>
-            </div>
+
+            <% if (user.role === "customer") { %>
+              <div class="mb-3">
+                <label class="small mb-1" for="inputName">Name</label>
+                <input
+                  class="form-control"
+                  id="inputName"
+                  name="name"
+                  type="text"
+                  placeholder="Enter your Name"
+                  value="<%= user.name %>"
+                />
+                <div id="nameValidation" class="text-danger"></div>
+              </div>
+              <div class="mb-3">
+                <label class="small mb-1" for="address">Address</label>
+                <input
+                  class="form-control"
+                  id="address"
+                  name="address"
+                  type="text"
+                  placeholder="Enter your Address"
+                  value="<%= user.address %>"
+                />
+                <div id="nameValidation" class="text-danger"></div>
+              </div>
+            <% } %>
             <% if (user.role === "vendor") { %>
               <div class="row gx-3 mb-3">
                 <div class="col-md-6" id="businessNameContainer">

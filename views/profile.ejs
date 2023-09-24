@@ -65,6 +65,7 @@
                     readonly
                   />
                 </div>
+                <% if (user.role === "customer") { %>
                 <div class="mb-3">
                   <label class="small mb-1" for="inputName">Name</label>
                   <input
@@ -87,8 +88,7 @@
                   />
                   <div id="nameValidation" class="text-danger"></div>
                 </div>
-
-                <% if (user.role === "vendor") { %>
+                <% } %> <% if (user.role === "vendor") { %>
                 <div class="row gx-3 mb-3">
                   <div class="col-md-6" id="businessNameContainer">
                     <label class="small mb-1" for="inputBusinessName"
@@ -119,18 +119,18 @@
                 <% } %>
                 <!-- Distribution Hubs for Shipper -->
                 <% if (user.role === "shipper") { %>
-                  <div class="mb-3" id="distributionHubContainer">
-                    <label class="small mb-1" for="inputDistributionHub"
-                      >Distribution Hub</label
-                    >
-                    <input
-                      class="form-control"
-                      id="inputLocation"
-                      type="text"
-                      value="<%= hub?.name %>"
-                      readonly
-                    />
-                  </div>
+                <div class="mb-3" id="distributionHubContainer">
+                  <label class="small mb-1" for="inputDistributionHub"
+                    >Distribution Hub</label
+                  >
+                  <input
+                    class="form-control"
+                    id="inputLocation"
+                    type="text"
+                    value="<%= hub?.name %>"
+                    readonly
+                  />
+                </div>
                 <% } %>
                 <!-- End of Distribution Hubs Select -->
                 <a href="/profile/edit" class="btn btn-primary">Edit</a>
