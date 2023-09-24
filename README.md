@@ -16,3 +16,5 @@ vendor123456 - 123456
 5. run server `npm run dev`
 6. Open browser and open localhost:8080 
 
+## Presentation and demo link
+https://youtu.be/AfF7SDjdz6o
