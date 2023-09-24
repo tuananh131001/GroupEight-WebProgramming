@@ -1,17 +1,17 @@
-<!-- // RMIT University Vietnam
+// RMIT University Vietnam
 // Course: COSC2430 Web Programming
 // Semester: 2023B
 // Assessment: Full-stack Web Application
 // Author: Team Eight
 // Acknowledgement: Google , Stackoverflow, w3schools -->
-<!-- Filter Form -->
+
 const rangeInput = document.querySelectorAll(".range-input input"),
 priceInput = document.querySelectorAll(".price-input input"),
 range = document.querySelector(".slider .progress");
 let priceGap = 1000;
 
 priceInput.forEach(input =>{
-    input.addEventListener("input", e =>{
+    input.addEventListener("input", e =>{\
         let minPrice = parseInt(priceInput[0].value),
         maxPrice = parseInt(priceInput[1].value);
 
