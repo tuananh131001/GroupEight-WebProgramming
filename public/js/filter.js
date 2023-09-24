@@ -11,7 +11,7 @@ range = document.querySelector(".slider .progress");
 let priceGap = 1000;
 
 priceInput.forEach(input =>{
-    input.addEventListener("input", e =>{\
+    input.addEventListener("input", e =>{
         let minPrice = parseInt(priceInput[0].value),
         maxPrice = parseInt(priceInput[1].value);
 
