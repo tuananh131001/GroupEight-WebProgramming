@@ -43,7 +43,7 @@
             </div>
             <div class="mb-3">
               <label class="small mb-1" for="inputRole">Role</label>
-              <select class="form-select" id="inputRole" name="role"disabled>
+              <select class="form-select" id="inputRole" name="role" disabled>
                 
                 <option value="<%= user.role %>"><%= user.role %></option>
               </select>
@@ -88,20 +88,22 @@
                 />
               </div>
             </div>
-            <!-- End of Distribution Hubs Select -->
-            <div class="py-2">
-              <label for="distributionHub">Select Distribution Hub:</label>
-              <select
-                class="form-select"
-                aria-label="Default select example"
-                id="distributionHub"
-                name="distributionHub"
-              >
-                <% hubs?.forEach(hub => { %>
-                <option value=<%= hub._id %>><%= hub.name %></option>
-                <% }); %>
-              </select>
-            </div>
+            
+            <% if (user.role === "shipper") { %>
+              <div class="py-2">
+                <label for="distributionHub">Select Distribution Hub:</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  id="distributionHub"
+                  name="distributionHub"
+                >
+                  <% hubs?.forEach(hub => { %>
+                  <option value=<%= hub._id %>><%= hub.name %></option>
+                  <% }); %>
+                </select>
+              </div>
+            <% } %>
             
             <input type="submit" value="Submit"  class="btn btn-primary">
             </input>
